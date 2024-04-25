@@ -15,7 +15,7 @@ class _AllMyAssetsViewState extends State<AllMyAssetsView> {
         return Scaffold(
           appBar: AppBar(
             title: Text(
-              'All assets',
+              'My assets',
               style: GoogleFonts.rubik(
                 fontSize: 18.sp,
                 fontWeight: FontWeight.w700,

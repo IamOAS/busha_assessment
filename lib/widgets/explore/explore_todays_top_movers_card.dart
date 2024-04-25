@@ -12,7 +12,7 @@ class ExploreTodaysTopMoversCard extends ContraWidget<ExploreController> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // My assets title
+          // Today's top movers title
           ExploreTitle(
             title: 'Today\'s Top Movers',
             onTapSeeAll: () {

@@ -44,7 +44,7 @@ class _EmptyPageViewState extends State<EmptyPageView> with SingleTickerProvider
                   style: GoogleFonts.inter(
                     fontSize: 24.sp,
                     fontWeight: FontWeight.w700,
-                    color: CustomColors.black.withOpacity(0.95),
+                    color: CustomColors.primary70,
                   ),
                 ),
               ),

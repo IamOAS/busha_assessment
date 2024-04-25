@@ -1,6 +1,4 @@
 import 'package:busha_assessment/core/utils/exports.dart';
-import 'package:busha_assessment/ui/widgets/explore/explore_todays_top_movers_card.dart';
-import '../widgets/explore/explore_balance_card.dart';
 
 class ExploreView extends StatefulWidget {
   const ExploreView({super.key});
@@ -61,6 +59,13 @@ class _ExploreViewState extends State<ExploreView> {
                   20.szbh,
                   // Today's top movers card
                   const ExploreTodaysTopMoversCard(),
+                  20.szbh,
+                  // Divider
+                  const ExploreDivider(),
+                  20.szbh,
+                  // Trending news card
+                  const ExploreTrendingNewsCard(),
+                  30.szbh,
                 ],
               ),
             ),

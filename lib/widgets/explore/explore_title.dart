@@ -15,6 +15,7 @@ class ExploreTitle extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
+        // Title
         Flexible(
           child: Text(
             title,
@@ -26,6 +27,7 @@ class ExploreTitle extends StatelessWidget {
           ),
         ),
         16.szbw,
+        // See all
         Flexible(
           child: InkWell(
             onTap: onTapSeeAll,

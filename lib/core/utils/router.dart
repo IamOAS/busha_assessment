@@ -1,6 +1,3 @@
-import 'package:busha_assessment/ui/views/all_my_assets_view.dart';
-import 'package:busha_assessment/ui/views/all_todays_top_movers_views.dart';
-
 import 'exports.dart';
 
 /// Routes class to store route names
@@ -11,6 +8,7 @@ abstract class Routes {
   static const dashboardView = '/dashboardView';
   static const allAssetsView = '/allAssetsView';
   static const allTodaysTopMoversView = '/allTodaysTopMoversView';
+  static const allTrendingNewsView = '/allTrendingNewsView';
 }
 
 class Routers {
@@ -51,6 +49,12 @@ class Routers {
       case Routes.allTodaysTopMoversView:
         return _pageRoute(
           const AllTodaysTopMoversView(),
+        );
+
+      // AllTrendingNewsView
+      case Routes.allTrendingNewsView:
+        return _pageRoute(
+          const AllTrendingNewsView(),
         );
 
       default:

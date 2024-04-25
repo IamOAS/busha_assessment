@@ -16,7 +16,7 @@ class _AllTodaysTopMoversViewState extends State<AllTodaysTopMoversView> {
         return Scaffold(
           appBar: AppBar(
             title: Text(
-              'All top movers',
+              'Today\'s top movers',
               style: GoogleFonts.rubik(
                 fontSize: 18.sp,
                 fontWeight: FontWeight.w700,
