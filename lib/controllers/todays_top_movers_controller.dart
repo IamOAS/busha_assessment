@@ -10,4 +10,6 @@ class TodaysTopMoversController extends ContraController {
         ...ref.watch(todayTopMoversProvider),
         ...ref.watch(todayTopMoversProvider),
       ];
+
+  void navigateBack() => ref.read(navigationServiceProvider).navigateBack();
 }

@@ -14,6 +14,11 @@ class _AllMyAssetsViewState extends State<AllMyAssetsView> {
       builder: (BuildContext context, MyAssetsController controller) {
         return Scaffold(
           appBar: AppBar(
+            automaticallyImplyLeading: false,
+            leading: InkWell(
+              onTap: () => controller.navigateBack(),
+              child: const CustomBackButton(),
+            ),
             title: Text(
               'My assets',
               style: GoogleFonts.rubik(
@@ -44,6 +49,26 @@ class _AllMyAssetsViewState extends State<AllMyAssetsView> {
         );
       },
       controllerBuilder: () => MyAssetsController(),
+    );
+  }
+}
+
+class CustomBackButton extends StatelessWidget {
+  const CustomBackButton({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 16.h,
+      width: 11.2.w,
+      child: Center(
+        child: SvgPicture.asset(
+          'back'.svg,
+          fit: BoxFit.cover,
+        ),
+      ),
     );
   }
 }

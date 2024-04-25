@@ -42,6 +42,7 @@ export 'package:busha_assessment/widgets/explore/trending_news_container.dart';
 export 'package:busha_assessment/views/explore/all_my_assets_view.dart';
 export 'package:busha_assessment/views/explore/all_trending_news_view.dart';
 export 'package:busha_assessment/views/explore/all_todays_top_movers_views.dart';
+export 'package:busha_assessment/controllers/trending_news_controller.dart';
 
 // Controllers exports
 export 'package:busha_assessment/controllers/splash_controller.dart';
@@ -61,6 +62,6 @@ export 'package:busha_assessment/models/asset.dart';
 
 // Views exports
 export 'package:busha_assessment/views/dashboard.dart';
-export 'package:busha_assessment/views/login_view.dart';
-export 'package:busha_assessment/views/signup_view.dart';
+export 'package:busha_assessment/views/auth/login_view.dart';
+export 'package:busha_assessment/views/auth/signup_view.dart';
 export 'package:busha_assessment/views/splash_view.dart';

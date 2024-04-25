@@ -67,7 +67,7 @@ class ExploreTrendingNewsCard extends ContraWidget<ExploreController> {
                 16.szbh,
                 // Divider
                 Divider(
-                  thickness: 1.w,
+                  thickness: 1.h,
                   color: const Color(0xffe3e5e6),
                 ),
                 16.szbh,

@@ -1,12 +1,15 @@
 import 'package:busha_assessment/core/utils/exports.dart';
 
-class ExploreBalanceCard extends ContraWidget<ExploreController> {
+class ExploreBalanceCard extends StatelessWidget {
   const ExploreBalanceCard({
     super.key,
+    required this.controller,
   });
 
+  final ExploreController controller;
+
   @override
-  Widget build(BuildContext context, ExploreController controller) {
+  Widget build(BuildContext context) {
     return Padding(
       padding: 16.hp,
       child: Column(
@@ -28,7 +31,9 @@ class ExploreBalanceCard extends ContraWidget<ExploreController> {
               ),
               4.szbw,
               InkWell(
-                onTap: controller.toggleShowBalance,
+                onTap: () {
+                  controller.toggleShowBalance();
+                },
                 child: Icon(
                   controller.isBalanceShown ? Icons.visibility : Icons.visibility_off,
                   color: CustomColors.black.withOpacity(0.6),

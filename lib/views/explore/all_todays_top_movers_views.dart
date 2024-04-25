@@ -15,6 +15,11 @@ class _AllTodaysTopMoversViewState extends State<AllTodaysTopMoversView> {
       builder: (BuildContext context, TodaysTopMoversController controller) {
         return Scaffold(
           appBar: AppBar(
+            automaticallyImplyLeading: false,
+            leading: InkWell(
+              onTap: () => controller.navigateBack(),
+              child: const CustomBackButton(),
+            ),
             title: Text(
               'Today\'s top movers',
               style: GoogleFonts.rubik(

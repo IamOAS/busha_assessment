@@ -10,47 +10,60 @@ class AllTrendingNewsView extends StatefulWidget {
 class _AllTrendingNewsViewState extends State<AllTrendingNewsView> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Trending news',
-          style: GoogleFonts.rubik(
-            fontSize: 18.sp,
-            fontWeight: FontWeight.w700,
+    return ContraViewBuilder(
+      builder: (BuildContext context, TrendingNewsController controller) {
+        return Scaffold(
+          appBar: AppBar(
+            automaticallyImplyLeading: false,
+            leading: InkWell(
+              onTap: () => controller.navigateBack(),
+              child: const CustomBackButton(),
+            ),
+            title: Text(
+              'Trending news',
+              style: GoogleFonts.rubik(
+                fontSize: 18.sp,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+            centerTitle: true,
           ),
-        ),
-        centerTitle: true,
-      ),
-      body: SafeArea(
-        child: Padding(
-          padding: 16.hp,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              16.szbh,
-              // Trending news
-              Expanded(
-                child: ListView.separated(
-                  shrinkWrap: true,
-                  itemCount: 10,
-                  itemBuilder: (context, index) => const TrendingNewsContainer(),
-                  separatorBuilder: (context, index) => Column(
-                    children: [
-                      16.szbh,
-                      // Divider
-                      Divider(
-                        thickness: 1.w,
-                        color: const Color(0xffe3e5e6),
+          body: SafeArea(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                16.szbh,
+                // Trending news
+                Expanded(
+                  child: ListView.separated(
+                    shrinkWrap: true,
+                    itemCount: 10,
+                    itemBuilder: (context, index) => Padding(
+                      padding: 16.hp,
+                      child: const TrendingNewsContainer(),
+                    ),
+                    separatorBuilder: (context, index) => Padding(
+                      padding: 16.hp,
+                      child: Column(
+                        children: [
+                          16.szbh,
+                          // Divider
+                          Divider(
+                            thickness: 1.h,
+                            color: const Color(0xffe3e5e6),
+                          ),
+                          16.szbh,
+                        ],
                       ),
-                      16.szbh,
-                    ],
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
-      ),
+        );
+      },
+      controllerBuilder: () => TrendingNewsController(),
     );
   }
 }

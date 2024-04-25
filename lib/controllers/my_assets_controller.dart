@@ -10,4 +10,6 @@ class MyAssetsController extends ContraController {
         ...ref.watch(assetsProvider),
         ...ref.watch(assetsProvider),
       ];
+
+  void navigateBack() => ref.read(navigationServiceProvider).navigateBack();
 }

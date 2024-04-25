@@ -17,7 +17,7 @@ class TodaysTopMoversContainer extends StatelessWidget {
         color: CustomColors.white,
         borderRadius: BorderRadius.circular(8.r),
         border: Border.all(
-          width: 1.w,
+          width: 1.h,
           color: CustomColors.black.withOpacity(0.12),
         ),
         boxShadow: [

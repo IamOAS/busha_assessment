@@ -46,7 +46,7 @@ class _ExploreViewState extends State<ExploreView> {
                 children: [
                   22.szbh,
                   // Balance card
-                  const ExploreBalanceCard(),
+                  ExploreBalanceCard(controller: controller),
                   controller.isBalanceShown ? 20.szbh : 1.szbh,
                   // Divider
                   const ExploreDivider(),
