@@ -98,7 +98,7 @@ class TextFormFieldWidget extends StatelessWidget {
         errorStyle: GoogleFonts.inter(
           fontSize: 14.sp,
           fontWeight: FontWeight.w400,
-          color: CustomColors.red,
+          color: CustomColors.error70,
         ),
         hintText: hintText,
         hintStyle: GoogleFonts.inter(

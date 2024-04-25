@@ -1,5 +1,5 @@
 import 'package:busha_assessment/core/utils/exports.dart';
-import 'package:busha_assessment/ui/views/empty_page.dart';
+import 'package:busha_assessment/ui/views/empty_page_view.dart';
 import 'package:busha_assessment/ui/views/explore_view.dart';
 
 class DashboardView extends StatefulWidget {
@@ -56,8 +56,8 @@ class _DashboardViewState extends State<DashboardView> {
                 )
                 .toList(),
             currentIndex: controller.selectedIndex,
-            elevation: 1.0,
-            backgroundColor: CustomColors.backgroundOnLight,
+            elevation: 4.0,
+            backgroundColor: CustomColors.white,
             selectedItemColor: CustomColors.black.withOpacity(0.95),
             unselectedItemColor: CustomColors.black.withOpacity(0.32),
             onTap: controller.onItemTapped,

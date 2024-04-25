@@ -1,3 +1,6 @@
+import 'package:busha_assessment/ui/views/all_my_assets_view.dart';
+import 'package:busha_assessment/ui/views/all_todays_top_movers_views.dart';
+
 import 'exports.dart';
 
 /// Routes class to store route names
@@ -6,6 +9,8 @@ abstract class Routes {
   static const loginView = '/loginView';
   static const signupView = '/signupView';
   static const dashboardView = '/dashboardView';
+  static const allAssetsView = '/allAssetsView';
+  static const allTodaysTopMoversView = '/allTodaysTopMoversView';
 }
 
 class Routers {
@@ -36,6 +41,18 @@ class Routers {
           const DashboardView(),
         );
 
+      // AllAssetsView
+      case Routes.allAssetsView:
+        return _pageRoute(
+          const AllMyAssetsView(),
+        );
+
+      // AllTodaysTopMoversView
+      case Routes.allTodaysTopMoversView:
+        return _pageRoute(
+          const AllTodaysTopMoversView(),
+        );
+
       default:
         // If the requested route is not found, show an unknown route page
         return _unknownRoutePage(settings.name!);
@@ -54,7 +71,7 @@ PageRoute _pageRoute(Widget widget) {
 PageRoute _unknownRoutePage(String routeName) => MaterialPageRoute(
       builder: (ctx) => Scaffold(
         body: Container(
-          color: CustomColors.backgroundOnLight,
+          color: CustomColors.white,
           width: double.infinity,
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: Column(

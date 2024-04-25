@@ -6,6 +6,8 @@ export 'package:dio/dio.dart';
 export 'package:logger/logger.dart';
 export 'package:contra/contra.dart';
 export 'package:flutter_riverpod/flutter_riverpod.dart';
+export 'package:intl/intl.dart' hide TextDirection;
+export 'package:responsive_grid_list/responsive_grid_list.dart';
 
 // Flutter internal exports
 export 'package:flutter/material.dart';
@@ -28,17 +30,28 @@ export 'package:busha_assessment/core/services/network_service.dart';
 export 'package:busha_assessment/ui/widgets/custom_button.dart';
 export 'package:busha_assessment/ui/widgets/custom_text_form_field.dart';
 export 'package:busha_assessment/ui/widgets/size_x_svg.dart';
+export 'package:busha_assessment/ui/widgets/explore/explore_divider.dart';
+export 'package:busha_assessment/ui/widgets/explore/explore_title.dart';
+export 'package:busha_assessment/ui/widgets/explore/explore_my_assets_card.dart';
+export 'package:busha_assessment/ui/widgets/explore/my_assets_card_list.dart';
+export 'package:busha_assessment/ui/widgets/explore/todays_top_movers_card_list.dart';
+export 'package:busha_assessment/ui/widgets/explore/todays_top_movers_container.dart';
 
 // Controllers exports
 export 'package:busha_assessment/controllers/splash_controller.dart';
 export 'package:busha_assessment/controllers/dashboard_controller.dart';
 export 'package:busha_assessment/controllers/explore_controller.dart';
+export 'package:busha_assessment/controllers/my_assets_controller.dart';
 
 // Services exports
 export 'package:busha_assessment/core/services/navigation_service.dart';
 
 // Providers exports
 export 'package:busha_assessment/core/providers/navigation_service_provider.dart';
+export 'package:busha_assessment/core/providers/assets_provider.dart';
+
+// Models exports
+export 'package:busha_assessment/core/models/asset.dart';
 
 // Views exports
 export 'package:busha_assessment/ui/views/dashboard.dart';

@@ -41,14 +41,14 @@ class CustomButton extends StatelessWidget {
                   style: GoogleFonts.inter(
                     fontSize: 16.sp,
                     fontWeight: FontWeight.w600,
-                    color: CustomColors.backgroundOnLight,
+                    color: CustomColors.white,
                   ),
                 )
               : SizedBox(
                   height: 20.h,
                   width: 20.h,
                   child: CircularProgressIndicator.adaptive(
-                    backgroundColor: appProgressIndicatorColor ?? CustomColors.backgroundOnLight,
+                    backgroundColor: appProgressIndicatorColor ?? CustomColors.white,
                   ),
                 ),
         ),

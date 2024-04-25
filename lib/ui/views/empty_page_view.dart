@@ -36,6 +36,7 @@ class _EmptyPageViewState extends State<EmptyPageView> with SingleTickerProvider
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              // Empty Page
               FadeTransition(
                 opacity: _animation,
                 child: Text(
@@ -48,6 +49,7 @@ class _EmptyPageViewState extends State<EmptyPageView> with SingleTickerProvider
                 ),
               ),
               16.szbh,
+              // This page is empty for now. Please check back later.
               Text(
                 'This page is empty for now. Please check back later.',
                 style: GoogleFonts.inter(

@@ -10,7 +10,7 @@ final ThemeData appThemeData = ThemeData(
   primaryColor: CustomColors.primary70,
   colorScheme: ColorScheme.light(
     primary: CustomColors.primary70,
-    background: CustomColors.backgroundOnLight,
+    background: CustomColors.white,
   ),
   fontFamily: GoogleFonts.inter().fontFamily,
   textSelectionTheme: TextSelectionThemeData(cursorColor: CustomColors.primary70),
@@ -18,7 +18,7 @@ final ThemeData appThemeData = ThemeData(
   primarySwatch: generateMaterialColor(CustomColors.primary70),
   appBarTheme: AppBarTheme(
     elevation: 0.0,
-    color: CustomColors.backgroundOnLight,
+    color: CustomColors.white,
   ),
 );
 
