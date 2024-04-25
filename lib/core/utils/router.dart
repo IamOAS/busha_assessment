@@ -1,6 +1,3 @@
-import 'package:busha_assessment/ui/views/login_view.dart';
-import 'package:busha_assessment/ui/views/signup_view.dart';
-import 'package:busha_assessment/ui/views/splash_view.dart';
 import 'exports.dart';
 
 /// Routes class to store route names
@@ -8,6 +5,7 @@ abstract class Routes {
   static const splashView = '/splashView';
   static const loginView = '/loginView';
   static const signupView = '/signupView';
+  static const dashboardView = '/dashboardView';
 }
 
 class Routers {
@@ -30,6 +28,12 @@ class Routers {
       case Routes.signupView:
         return _pageRoute(
           const SignUpView(),
+        );
+
+      // DashboardView
+      case Routes.dashboardView:
+        return _pageRoute(
+          const DashboardView(),
         );
 
       default:

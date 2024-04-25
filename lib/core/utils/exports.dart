@@ -12,6 +12,7 @@ export 'package:flutter/material.dart';
 export 'package:flutter/cupertino.dart' hide RefreshCallback;
 export 'dart:async' hide AsyncError;
 export 'dart:io';
+export 'package:flutter/gestures.dart';
 
 // Custom exports
 export 'package:busha_assessment/core/extensions/widget_extension.dart';
@@ -26,13 +27,21 @@ export 'package:busha_assessment/core/services/error_service.dart';
 export 'package:busha_assessment/core/services/network_service.dart';
 export 'package:busha_assessment/ui/widgets/custom_button.dart';
 export 'package:busha_assessment/ui/widgets/custom_text_form_field.dart';
+export 'package:busha_assessment/ui/widgets/size_x_svg.dart';
 
 // Controllers exports
 export 'package:busha_assessment/controllers/splash_controller.dart';
-export 'package:busha_assessment/controllers/login_controller.dart';
+export 'package:busha_assessment/controllers/dashboard_controller.dart';
+export 'package:busha_assessment/controllers/explore_controller.dart';
 
 // Services exports
 export 'package:busha_assessment/core/services/navigation_service.dart';
 
 // Providers exports
 export 'package:busha_assessment/core/providers/navigation_service_provider.dart';
+
+// Views exports
+export 'package:busha_assessment/ui/views/dashboard.dart';
+export 'package:busha_assessment/ui/views/login_view.dart';
+export 'package:busha_assessment/ui/views/signup_view.dart';
+export 'package:busha_assessment/ui/views/splash_view.dart';

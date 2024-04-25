@@ -1,22 +1,26 @@
 import 'package:busha_assessment/core/utils/exports.dart';
 
-StateProvider<bool> _showPassword = StateProvider<bool>((ref) => false);
+StateProvider<bool> _showSignUpPassword = StateProvider<bool>((ref) => false);
+StateProvider<bool> _showLoginPassword = StateProvider<bool>((ref) => false);
 
-class SignUpController extends ContraController {
-  SignUpController() : super();
+/// Controller for the authentication flow.
+class AuthController extends ContraController {
+  AuthController() : super();
 
-  bool get isPasswordShown => ref.watch(_showPassword);
+  bool get isSignUpPasswordShown => ref.watch(_showSignUpPassword);
+  bool get isLoginPasswordShown => ref.watch(_showLoginPassword);
 
   // Function to toggle password visibility
-  void toggleShowPassword() => ref.read(_showPassword.notifier).state = !isPasswordShown;
+  void toggleShowSignUpPassword() => ref.read(_showSignUpPassword.notifier).state = !isSignUpPasswordShown;
+  void toggleShowLoginPassword() => ref.read(_showLoginPassword.notifier).state = !isLoginPasswordShown;
 
   /// Function to validate password
   String? Function(String?)? validatePassword() => (value) {
         if (value == null || value.isEmpty) {
           return 'Password is required';
         }
-        if (value.length < 6) {
-          return 'Password must be at least 6 characters';
+        if (value.length < 8) {
+          return 'Password must be at least 8 characters';
         }
         return null;
       };

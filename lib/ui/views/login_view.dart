@@ -1,5 +1,5 @@
+import 'package:busha_assessment/controllers/auth_controller.dart';
 import 'package:busha_assessment/core/utils/exports.dart';
-import 'package:flutter/gestures.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -26,7 +26,7 @@ class _LoginViewState extends State<LoginView> {
         _passwordFocusNode.dispose();
         controller.dispose();
       },
-      builder: (BuildContext context, LoginController controller) {
+      builder: (BuildContext context, AuthController controller) {
         return Scaffold(
           body: SafeArea(
             child: Padding(
@@ -88,11 +88,11 @@ class _LoginViewState extends State<LoginView> {
                                 focusNode: _passwordFocusNode,
                                 hintText: 'Enter password',
                                 suffixIcon: Tooltip(
-                                  message: !controller.isPasswordShown ? 'Show password' : 'Hide password',
+                                  message: !controller.isLoginPasswordShown ? 'Show password' : 'Hide password',
                                   child: TextButton(
-                                    onPressed: () => controller.toggleShowPassword(),
+                                    onPressed: () => controller.toggleShowLoginPassword(),
                                     child: Text(
-                                      !controller.isPasswordShown ? 'SHOW' : 'HIDE',
+                                      !controller.isLoginPasswordShown ? 'SHOW' : 'HIDE',
                                       style: GoogleFonts.inter(
                                         fontSize: 12.sp,
                                         fontWeight: FontWeight.w400,
@@ -102,7 +102,7 @@ class _LoginViewState extends State<LoginView> {
                                   ),
                                 ),
                                 keyboardType: TextInputType.visiblePassword,
-                                obscureText: !controller.isPasswordShown,
+                                obscureText: !controller.isLoginPasswordShown,
                                 enabled: !controller.isBusy,
                                 onChanged: (value) {
                                   setState(() {
@@ -144,7 +144,9 @@ class _LoginViewState extends State<LoginView> {
                         formKey: _formKey,
                         isLoading: controller.isBusy,
                         text: 'Continue',
-                        onTap: () async {},
+                        onTap: () async {
+                          controller.navigateTo(Routes.dashboardView);
+                        },
                       ),
                     ),
                     16.szbh,
@@ -184,7 +186,7 @@ class _LoginViewState extends State<LoginView> {
           ),
         );
       },
-      controllerBuilder: () => LoginController(),
+      controllerBuilder: () => AuthController(),
     );
   }
 }

@@ -1,6 +1,5 @@
-import 'package:busha_assessment/controllers/signup_controller.dart';
+import 'package:busha_assessment/controllers/auth_controller.dart';
 import 'package:busha_assessment/core/utils/exports.dart';
-import 'package:flutter/gestures.dart';
 
 class SignUpView extends StatefulWidget {
   const SignUpView({super.key});
@@ -27,7 +26,7 @@ class _SignUpViewState extends State<SignUpView> {
         _passwordFocusNode.dispose();
         controller.dispose();
       },
-      builder: (BuildContext context, SignUpController controller) {
+      builder: (BuildContext context, AuthController controller) {
         return Scaffold(
           body: SafeArea(
             child: Padding(
@@ -89,11 +88,11 @@ class _SignUpViewState extends State<SignUpView> {
                                 focusNode: _passwordFocusNode,
                                 hintText: 'Enter password',
                                 suffixIcon: Tooltip(
-                                  message: !controller.isPasswordShown ? 'Show password' : 'Hide password',
+                                  message: !controller.isSignUpPasswordShown ? 'Show password' : 'Hide password',
                                   child: TextButton(
-                                    onPressed: () => controller.toggleShowPassword(),
+                                    onPressed: () => controller.toggleShowSignUpPassword(),
                                     child: Text(
-                                      !controller.isPasswordShown ? 'SHOW' : 'HIDE',
+                                      !controller.isSignUpPasswordShown ? 'SHOW' : 'HIDE',
                                       style: GoogleFonts.inter(
                                         fontSize: 12.sp,
                                         fontWeight: FontWeight.w400,
@@ -103,7 +102,7 @@ class _SignUpViewState extends State<SignUpView> {
                                   ),
                                 ),
                                 keyboardType: TextInputType.visiblePassword,
-                                obscureText: !controller.isPasswordShown,
+                                obscureText: !controller.isSignUpPasswordShown,
                                 enabled: !controller.isBusy,
                                 onChanged: (value) {
                                   setState(() {
@@ -155,7 +154,9 @@ class _SignUpViewState extends State<SignUpView> {
                         formKey: _formKey,
                         isLoading: controller.isBusy,
                         text: 'Continue',
-                        onTap: () async {},
+                        onTap: () async {
+                          controller.navigateTo(Routes.dashboardView);
+                        },
                       ),
                     ),
                     30.szbh,
@@ -166,7 +167,7 @@ class _SignUpViewState extends State<SignUpView> {
           ),
         );
       },
-      controllerBuilder: () => SignUpController(),
+      controllerBuilder: () => AuthController(),
     );
   }
 }
