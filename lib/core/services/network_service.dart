@@ -2,7 +2,7 @@ import 'package:busha_assessment/core/utils/exports.dart';
 
 // Network service class. This class is responsible for making network requests.
 class NetworkService {
-  // This variable stores the access token.
+  /// This variable stores the access token.
   String? accessToken;
   // This variable stores the Dio instance.
   final Dio _dio;
@@ -35,14 +35,14 @@ class NetworkService {
       _updateAuthorizationHeader();
       return await request();
     } on DioException catch (e) {
-      return errorService.handleError(e);
+      return ErrorService().handleError(e);
     }
   }
 
-  // GET request. This method makes a GET request to the specified URL.
+  /// GET request. This method makes a GET request to the specified URL.
   Future<Response<dynamic>> getData({required String url}) async => await _handleRequest(() => _dio.get(url));
 
-  // POST request. This method makes a POST request to the specified URL.
+  /// POST request. This method makes a POST request to the specified URL.
   Future<Response<dynamic>> postData({
     required String url,
     Object? data,

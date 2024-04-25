@@ -1,22 +1,23 @@
+
 import 'package:busha_assessment/core/utils/exports.dart';
 
-// Service class to handle error messages
+/// Service class to handle error messages
 class ErrorService {
   // Map to store default error messages based on DioExceptionType
-  final Map<DioExceptionType, String> defaultErrorMessages = {
+  final Map<DioExceptionType, String> _defaultErrorMessages = {
     DioExceptionType.cancel: 'Request cancelled!',
     DioExceptionType.connectionError: 'Please check your network connection!',
     DioExceptionType.receiveTimeout: 'Network connection timed out!',
     DioExceptionType.sendTimeout: 'Network connection timed out!',
   };
 
-  // Method to handle DioException and return a Response object
+  /// Method to handle DioException and return a Response object
   Response handleError(DioException? e) {
     final message = _getMessageFromDioException(e);
     final errorCode = _getStatusCodeFromResponse(e?.response);
 
     return Response(
-      data: requestResponse(message: message, errorCode: errorCode),
+      data: _requestResponse(message: message, errorCode: errorCode),
       requestOptions: RequestOptions(path: ''),
     );
   }
@@ -27,13 +28,13 @@ class ErrorService {
 
     switch (e.type) {
       case DioExceptionType.cancel:
-        return defaultErrorMessages[e.type]!;
+        return _defaultErrorMessages[e.type]!;
       case DioExceptionType.connectionError:
-        return defaultErrorMessages[e.type]!;
+        return _defaultErrorMessages[e.type]!;
       case DioExceptionType.receiveTimeout:
       case DioExceptionType.sendTimeout:
       case DioExceptionType.connectionTimeout:
-        return defaultErrorMessages[DioExceptionType.connectionTimeout]!;
+        return _defaultErrorMessages[DioExceptionType.connectionTimeout]!;
       default:
         return _getMessageFromSpecificError(e.error);
     }
@@ -58,7 +59,7 @@ class ErrorService {
   }
 
   // Method to create a request response map
-  Map<String, dynamic> requestResponse({
+  Map<String, dynamic> _requestResponse({
     String? message,
     String? errorCode,
     dynamic data,
