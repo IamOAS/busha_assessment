@@ -78,23 +78,29 @@ class _TransactionDetailsViewState extends State<TransactionDetailsView> {
                     ),
                     67.szbh,
                     // View on blockchain explorer
-                    Row(
-                      children: [
-                        const SizeXSVG(icon: 'external-link', size: 24),
-                        16.szbw,
-                        Expanded(
-                          child: Text(
-                            'View on blockchain explorer',
-                            style: GoogleFonts.inter(
-                              fontSize: 16.sp,
-                              fontWeight: FontWeight.w400,
-                              color: CustomColors.black.withOpacity(0.95),
+                    InkWell(
+                      onTap: () => controller.launchURL(
+                        context: context,
+                        url: 'https://www.blockchain.com/explorer/transactions/btc/${controller.transactionDetailsTiles[0].value}',
+                      ),
+                      child: Row(
+                        children: [
+                          const SizeXSVG(icon: 'external-link', size: 24),
+                          16.szbw,
+                          Expanded(
+                            child: Text(
+                              'View on blockchain explorer',
+                              style: GoogleFonts.inter(
+                                fontSize: 16.sp,
+                                fontWeight: FontWeight.w400,
+                                color: CustomColors.black.withOpacity(0.95),
+                              ),
                             ),
                           ),
-                        ),
-                        16.szbw,
-                        const SizeXSVG(icon: 'chevron-right', size: 36),
-                      ],
+                          16.szbw,
+                          const SizeXSVG(icon: 'chevron-right', size: 36),
+                        ],
+                      ),
                     ),
                   ],
                 ),

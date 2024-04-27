@@ -22,7 +22,20 @@ class MyAssetCardList extends StatelessWidget {
       itemBuilder: (context, index) => InkWell(
         onTap: () {
           controller.setSelectedTransaction(assets[index].symbol);
-          controller.navigateTo(Routes.transactionsView);
+
+          if (assets[index].symbol == 'BTC') {
+            controller.navigateTo(Routes.transactionsView);
+          } else {
+            Fluttertoast.showToast(
+              msg: 'Coming soon!',
+              toastLength: Toast.LENGTH_LONG,
+              gravity: ToastGravity.BOTTOM,
+              timeInSecForIosWeb: 1,
+              backgroundColor: CustomColors.primary70,
+              textColor: CustomColors.white,
+              fontSize: 16.sp,
+            );
+          }
         },
         child: Row(
           children: [

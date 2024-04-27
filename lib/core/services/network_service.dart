@@ -11,7 +11,6 @@ class NetworkService {
   NetworkService()
       : _dio = Dio(
           BaseOptions(
-            baseUrl: 'https://www.google.com',
             receiveDataWhenStatusError: true,
             sendTimeout: const Duration(seconds: 30),
             connectTimeout: const Duration(seconds: 30),
@@ -40,10 +39,10 @@ class NetworkService {
   }
 
   /// GET request. This method makes a GET request to the specified URL.
-  Future<Response<dynamic>> getData({required String url}) async => await _handleRequest(() => _dio.get(url));
+  Future<Response<dynamic>> get({required String url}) async => await _handleRequest(() => _dio.get(url));
 
   /// POST request. This method makes a POST request to the specified URL.
-  Future<Response<dynamic>> postData({
+  Future<Response<dynamic>> post({
     required String url,
     Object? data,
     Map<String, dynamic>? queryParameters,

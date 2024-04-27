@@ -33,7 +33,20 @@ class ExploreTodaysTopMoversCard extends ContraWidget<ExploreController> {
                 return InkWell(
                   onTap: () {
                     controller.setSelectedTransaction(controller.todaysTopMovers[index].symbol);
-                    controller.navigateTo(Routes.transactionsView);
+
+                    if (controller.todaysTopMovers[index].symbol == 'BTC') {
+                      controller.navigateTo(Routes.transactionsView);
+                    } else {
+                      Fluttertoast.showToast(
+                        msg: 'Coming soon!',
+                        toastLength: Toast.LENGTH_LONG,
+                        gravity: ToastGravity.BOTTOM,
+                        timeInSecForIosWeb: 1,
+                        backgroundColor: CustomColors.primary70,
+                        textColor: CustomColors.white,
+                        fontSize: 16.sp,
+                      );
+                    }
                   },
                   child: TodaysTopMoversContainer(
                     todaysTopMover: controller.todaysTopMovers[index],

@@ -67,7 +67,7 @@ class ExploreBalanceCard extends StatelessWidget {
             ),
           } else ...{
             Text(
-              '****',
+              '******',
               style: GoogleFonts.rubik(
                 fontSize: 32.sp,
                 fontWeight: FontWeight.w700,

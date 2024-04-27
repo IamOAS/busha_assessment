@@ -1,8 +1,4 @@
 import 'exports.dart';
-import 'dart:math';
-
-/// Custom font family using GoogleFonts
-String? customFontFamily = GoogleFonts.inter().fontFamily;
 
 /// The app's theme data
 final ThemeData appThemeData = ThemeData(

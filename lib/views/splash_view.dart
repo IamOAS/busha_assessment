@@ -20,7 +20,7 @@ class _SplashViewState extends State<SplashView> with SingleTickerProviderStateM
   @override
   Widget build(BuildContext context) {
     return ContraViewBuilder(
-      onViewReady: (controller) {
+      onViewReady: (SplashController controller) {
         _animationController = AnimationController(
           vsync: this,
           duration: const Duration(milliseconds: 1500),
@@ -52,7 +52,7 @@ class _SplashViewState extends State<SplashView> with SingleTickerProviderStateM
         Timer(
           const Duration(seconds: 3),
           () async {
-            controller.clearStackAndNavigateTo(Routes.signupView);
+            controller.clearStackAndNavigateTo(Routes.dashboardView);
           },
         );
       },
