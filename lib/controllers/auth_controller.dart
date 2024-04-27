@@ -1,3 +1,4 @@
+import 'package:busha_assessment/core/providers/dashboard_providers.dart';
 import 'package:busha_assessment/core/utils/exports.dart';
 
 StateProvider<bool> _showSignUpPassword = StateProvider<bool>((ref) => false);
@@ -10,11 +11,21 @@ class AuthController extends ContraController {
   bool get isSignUpPasswordShown => ref.watch(_showSignUpPassword);
   bool get isLoginPasswordShown => ref.watch(_showLoginPassword);
 
-  // Function to toggle password visibility
+  // Function to toggle password visibility in the sign up view
   void toggleShowSignUpPassword() => ref.read(_showSignUpPassword.notifier).state = !isSignUpPasswordShown;
+
+  // Function to toggle password visibility in the login view
   void toggleShowLoginPassword() => ref.read(_showLoginPassword.notifier).state = !isLoginPasswordShown;
 
-  /// Function to validate password
+  // Function to delay for three seconds
+  Future<void> delayForThreeSeconds() async {
+    await runBusyFuture(
+      Future.delayed(
+        const Duration(seconds: 3),
+      ),
+    );
+  }
+
   String? Function(String?)? validatePassword() => (value) {
         if (value == null || value.isEmpty) {
           return 'Password is required';
@@ -39,6 +50,15 @@ class AuthController extends ContraController {
         }
         return null;
       };
+
+  // Function to set the selected bottom tab index
+  void setSelectedBottomTabIndex(int index) => ref.read(selectedBottomTabIndex.notifier).state = index;
+
+  // Sign up function
+  Future signOut() {
+    setSelectedBottomTabIndex(0);
+    return ref.read(navigationServiceProvider).clearStackAndNavigateTo(Routes.loginView);
+  }
 
   Future navigateTo(String routeName) => ref.read(navigationServiceProvider).navigateTo(routeName);
   Future replaceWith(String routeName) => ref.read(navigationServiceProvider).replaceWith(routeName);

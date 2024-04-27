@@ -146,6 +146,7 @@ class _LoginViewState extends State<LoginView> {
                         isLoading: controller.isBusy,
                         text: 'Continue',
                         onTap: () async {
+                          await controller.delayForThreeSeconds();
                           controller.navigateTo(Routes.dashboardView);
                         },
                       ),

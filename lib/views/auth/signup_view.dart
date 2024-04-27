@@ -156,6 +156,7 @@ class _SignUpViewState extends State<SignUpView> {
                         isLoading: controller.isBusy,
                         text: 'Continue',
                         onTap: () async {
+                          await controller.delayForThreeSeconds();
                           controller.navigateTo(Routes.dashboardView);
                         },
                       ),

@@ -11,6 +11,7 @@ class MyAssetsController extends ContraController {
         ...ref.watch(assetsProvider),
       ];
 
+  // Function to set the selected transaction
   void setSelectedTransaction(String? transaction) => ref.read(selectedTransactionProvider.notifier).state = transaction;
 
   Future navigateTo(String routeName) => ref.read(navigationServiceProvider).navigateTo(routeName);

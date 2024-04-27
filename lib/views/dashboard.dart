@@ -34,14 +34,14 @@ class _DashboardViewState extends State<DashboardView> {
       bottomNavigationBar: ContraViewBuilder(
         builder: (BuildContext context, DashboardController controller) {
           return BottomNavigationBar(
-            key: controller.bottomNavBarKey,
+            key: controller.bottomNavBarKey_,
             type: BottomNavigationBarType.fixed,
             showSelectedLabels: true,
             showUnselectedLabels: true,
-            items: controller.labels
+            items: controller.labels_
                 .map(
                   (e) => BottomNavigationBarItem(
-                    icon: controller.selectedIndex == controller.labels.indexOf(e)
+                    icon: controller.selectedIndex == controller.labels_.indexOf(e)
                         ? SizeXSVG(
                             icon: e.toLowerCase(),
                             size: 24,

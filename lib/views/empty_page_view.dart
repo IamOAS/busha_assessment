@@ -1,3 +1,4 @@
+import 'package:busha_assessment/controllers/auth_controller.dart';
 import 'package:busha_assessment/core/utils/exports.dart';
 
 /// A view that displays an empty page.
@@ -30,42 +31,61 @@ class _EmptyPageViewState extends State<EmptyPageView> with SingleTickerProvider
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Padding(
-          padding: 16.hp,
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                // Empty Page
-                FadeTransition(
-                  opacity: _animation,
-                  child: Text(
-                    'Empty Page',
-                    style: GoogleFonts.inter(
-                      fontSize: 24.sp,
-                      fontWeight: FontWeight.w700,
-                      color: CustomColors.primary70,
+    return ContraViewBuilder(
+      builder: (BuildContext context, AuthController controller) {
+        return Scaffold(
+          body: SafeArea(
+            child: Padding(
+              padding: 16.hp,
+              child: Column(
+                children: [
+                  Expanded(
+                    child: Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          // Empty Page
+                          FadeTransition(
+                            opacity: _animation,
+                            child: Text(
+                              'Empty Page',
+                              style: GoogleFonts.inter(
+                                fontSize: 24.sp,
+                                fontWeight: FontWeight.w700,
+                                color: CustomColors.primary70,
+                              ),
+                            ),
+                          ),
+                          16.szbh,
+                          // This page is empty for now. Please check back later.
+                          Text(
+                            'This page is empty for now. Please check back later.',
+                            style: GoogleFonts.inter(
+                              fontSize: 16.sp,
+                              fontWeight: FontWeight.w400,
+                              color: CustomColors.black.withOpacity(0.95),
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-                16.szbh,
-                // This page is empty for now. Please check back later.
-                Text(
-                  'This page is empty for now. Please check back later.',
-                  style: GoogleFonts.inter(
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.w400,
-                    color: CustomColors.black.withOpacity(0.95),
+                  // Sign out
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 16.w),
+                    child: CustomButton(
+                      onTap: () => controller.signOut(),
+                      text: 'Sign out',
+                    ),
                   ),
-                  textAlign: TextAlign.center,
-                ),
-              ],
+                ],
+              ),
             ),
           ),
-        ),
-      ),
+        );
+      },
+      controllerBuilder: () => AuthController(),
     );
   }
 }

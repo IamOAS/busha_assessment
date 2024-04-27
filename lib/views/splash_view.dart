@@ -52,7 +52,7 @@ class _SplashViewState extends State<SplashView> with SingleTickerProviderStateM
         Timer(
           const Duration(seconds: 3),
           () async {
-            controller.clearStackAndNavigateTo(Routes.dashboardView);
+            controller.clearStackAndNavigateTo(Routes.signupView);
           },
         );
       },
