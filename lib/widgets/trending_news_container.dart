@@ -1,5 +1,6 @@
 import 'package:busha_assessment/core/utils/exports.dart';
 
+/// A widget that displays a container for trending news.
 class TrendingNewsContainer extends StatelessWidget {
   const TrendingNewsContainer({
     super.key,

@@ -1,5 +1,6 @@
 import 'package:busha_assessment/core/utils/exports.dart';
 
+/// A widget that displays the user's balance.
 class ExploreBalanceCard extends StatelessWidget {
   const ExploreBalanceCard({
     super.key,

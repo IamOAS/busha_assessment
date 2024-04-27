@@ -1,5 +1,6 @@
 import 'package:busha_assessment/core/utils/exports.dart';
 
+/// A widget that displays a custom back button.
 class CustomBackButton extends StatelessWidget {
   const CustomBackButton({
     super.key,

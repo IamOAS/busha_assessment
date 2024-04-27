@@ -1,5 +1,6 @@
 import 'package:busha_assessment/core/utils/exports.dart';
 
+/// A view that displays the details of a transaction.
 class TransactionDetailsView extends StatefulWidget {
   const TransactionDetailsView({super.key});
 

@@ -1,5 +1,6 @@
 import 'package:busha_assessment/core/utils/exports.dart';
 
+/// A widget that displays a divider in the explore view.
 class ExploreDivider extends StatelessWidget {
   const ExploreDivider({
     super.key,

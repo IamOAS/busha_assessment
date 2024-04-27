@@ -1,5 +1,6 @@
 import 'package:busha_assessment/core/utils/exports.dart';
 
+/// A view that displays the explore screen.
 class ExploreView extends StatefulWidget {
   const ExploreView({super.key});
 

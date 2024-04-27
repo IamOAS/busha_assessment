@@ -1,5 +1,6 @@
 import 'package:busha_assessment/core/utils/exports.dart';
 
+/// A widget that displays a container for today's top movers.
 class TodaysTopMoversContainer extends StatelessWidget {
   const TodaysTopMoversContainer({
     super.key,

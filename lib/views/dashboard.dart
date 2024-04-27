@@ -2,6 +2,7 @@ import 'package:busha_assessment/core/utils/exports.dart';
 import 'package:busha_assessment/views/empty_page_view.dart';
 import 'package:busha_assessment/views/explore_view.dart';
 
+/// The dashboard view.
 class DashboardView extends StatefulWidget {
   const DashboardView({super.key});
 

@@ -1,5 +1,6 @@
 import 'package:busha_assessment/core/utils/exports.dart';
 
+/// A view that displays a list of transactions.
 class TransactionsView extends StatefulWidget {
   const TransactionsView({super.key});
 

@@ -1,5 +1,6 @@
 import 'package:busha_assessment/core/utils/exports.dart';
 
+/// A widget that displays a list of assets owned by the user in the explore view.
 class ExploreMyAssetsCard extends ContraWidget<ExploreController> {
   const ExploreMyAssetsCard({
     super.key,

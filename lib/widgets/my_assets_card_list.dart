@@ -1,5 +1,6 @@
 import 'package:busha_assessment/core/utils/exports.dart';
 
+/// A widget that displays a list of assets owned by the user.
 class MyAssetCardList extends StatelessWidget {
   const MyAssetCardList({
     super.key,

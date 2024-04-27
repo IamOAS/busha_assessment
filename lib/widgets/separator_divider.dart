@@ -1,5 +1,6 @@
 import 'package:busha_assessment/core/utils/exports.dart';
 
+/// A widget that displays a divider used as a separator in [ListView] builders.
 class SeparatorDivider extends StatelessWidget {
   const SeparatorDivider({
     super.key,

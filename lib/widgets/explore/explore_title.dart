@@ -1,5 +1,6 @@
 import 'package:busha_assessment/core/utils/exports.dart';
 
+/// A widget that displays a title in the explore view.
 class ExploreTitle extends StatelessWidget {
   const ExploreTitle({
     super.key,

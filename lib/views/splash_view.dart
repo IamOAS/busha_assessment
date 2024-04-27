@@ -1,5 +1,6 @@
 import 'package:busha_assessment/core/utils/exports.dart';
 
+/// A view that displays the splash screen.
 class SplashView extends StatefulWidget {
   const SplashView({super.key});
 

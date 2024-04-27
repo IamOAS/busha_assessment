@@ -1,6 +1,7 @@
 import 'package:busha_assessment/controllers/auth_controller.dart';
 import 'package:busha_assessment/core/utils/exports.dart';
 
+/// A view that displays the sign up screen.
 class SignUpView extends StatefulWidget {
   const SignUpView({super.key});
 

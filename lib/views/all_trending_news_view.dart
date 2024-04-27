@@ -1,5 +1,6 @@
 import 'package:busha_assessment/core/utils/exports.dart';
 
+/// A widget that displays a list of all trending news.
 class AllTrendingNewsView extends StatefulWidget {
   const AllTrendingNewsView({super.key});
 

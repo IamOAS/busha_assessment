@@ -1,4 +1,6 @@
 import 'package:busha_assessment/core/utils/exports.dart';
+
+/// A view that displays all the assets owned by the user.
 class AllMyAssetsView extends StatefulWidget {
   const AllMyAssetsView({super.key});
 
@@ -52,4 +54,3 @@ class _AllMyAssetsViewState extends State<AllMyAssetsView> {
     );
   }
 }
-

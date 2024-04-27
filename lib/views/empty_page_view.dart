@@ -1,5 +1,6 @@
 import 'package:busha_assessment/core/utils/exports.dart';
 
+/// A view that displays an empty page.
 class EmptyPageView extends StatefulWidget {
   const EmptyPageView({super.key});
 

@@ -1,5 +1,6 @@
 import 'package:busha_assessment/core/utils/exports.dart';
 
+/// A widget that displays a trending news card in the explore view.
 class ExploreTrendingNewsCard extends ContraWidget<ExploreController> {
   const ExploreTrendingNewsCard({
     super.key,

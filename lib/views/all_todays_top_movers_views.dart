@@ -1,5 +1,6 @@
 import 'package:busha_assessment/core/utils/exports.dart';
 
+/// A view that displays a list of today's top movers.
 class AllTodaysTopMoversView extends StatefulWidget {
   const AllTodaysTopMoversView({super.key});
 
@@ -53,8 +54,13 @@ class _AllTodaysTopMoversViewState extends State<AllTodaysTopMoversView> {
                       children: List<Widget>.generate(
                         controller.todaysTopMovers.length,
                         (index) {
-                          return TodaysTopMoversContainer(
-                            todaysTopMover: controller.todaysTopMovers[index],
+                          return InkWell(onTap: () {
+                    controller.setSelectedTransaction(controller.todaysTopMovers[index].symbol);
+                    controller.navigateTo(Routes.transactionsView);
+                  },
+                            child: TodaysTopMoversContainer(
+                              todaysTopMover: controller.todaysTopMovers[index],
+                            ),
                           );
                         },
                       ),

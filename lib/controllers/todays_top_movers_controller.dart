@@ -11,5 +11,8 @@ class TodaysTopMoversController extends ContraController {
         ...ref.watch(todayTopMoversProvider),
       ];
 
+  void setSelectedTransaction(String? transaction) => ref.read(selectedTransactionProvider.notifier).state = transaction;
+
   void navigateBack() => ref.read(navigationServiceProvider).navigateBack();
+  Future navigateTo(String routeName) => ref.read(navigationServiceProvider).navigateTo(routeName);
 }
