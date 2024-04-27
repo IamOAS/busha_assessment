@@ -24,6 +24,7 @@ class ExploreMyAssetsCard extends ContraWidget<ExploreController> {
           MyAssetCardList(
             shouldScroll: false,
             assets: controller.myAssets,
+            controller: controller,
           ),
         ],
       ),

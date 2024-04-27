@@ -62,16 +62,8 @@ class ExploreTrendingNewsCard extends ContraWidget<ExploreController> {
                     ],
                   )
                 : const TrendingNewsContainer(),
-            separatorBuilder: (context, index) => Column(
-              children: [
-                16.szbh,
-                // Divider
-                Divider(
-                  thickness: 1.h,
-                  color: const Color(0xffe3e5e6),
-                ),
-                16.szbh,
-              ],
+            separatorBuilder: (context, index) => const SeparatorDivider(
+              dividerColor: Color(0xffe3e5e6),
             ),
           ),
         ],

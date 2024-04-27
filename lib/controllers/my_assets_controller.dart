@@ -11,5 +11,6 @@ class MyAssetsController extends ContraController {
         ...ref.watch(assetsProvider),
       ];
 
+  Future navigateTo(String routeName) => ref.read(navigationServiceProvider).navigateTo(routeName);
   void navigateBack() => ref.read(navigationServiceProvider).navigateBack();
 }

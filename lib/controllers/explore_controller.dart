@@ -6,6 +6,9 @@ StateProvider<bool> _isBalanceShown = StateProvider<bool>((ref) => true);
 class ExploreController extends ContraController {
   ExploreController() : super();
 
+  String? get selectedTransaction => ref.watch(selectedTransactionProvider);
+  void setSelectedTransaction(String? transaction) => ref.read(selectedTransactionProvider.notifier).state = transaction;
+
   bool get isBalanceShown => ref.watch(_isBalanceShown);
   void toggleShowBalance() => ref.read(_isBalanceShown.notifier).state = !isBalanceShown;
 

@@ -1,5 +1,4 @@
 import 'package:busha_assessment/core/utils/exports.dart';
-
 class AllMyAssetsView extends StatefulWidget {
   const AllMyAssetsView({super.key});
 
@@ -21,8 +20,8 @@ class _AllMyAssetsViewState extends State<AllMyAssetsView> {
             ),
             title: Text(
               'My assets',
-              style: GoogleFonts.rubik(
-                fontSize: 18.sp,
+              style: GoogleFonts.inter(
+                fontSize: 16.sp,
                 fontWeight: FontWeight.w700,
               ),
             ),
@@ -40,6 +39,7 @@ class _AllMyAssetsViewState extends State<AllMyAssetsView> {
                     child: MyAssetCardList(
                       shouldScroll: true,
                       assets: controller.allMyAssets,
+                      controller: controller,
                     ),
                   ),
                 ],
@@ -53,22 +53,3 @@ class _AllMyAssetsViewState extends State<AllMyAssetsView> {
   }
 }
 
-class CustomBackButton extends StatelessWidget {
-  const CustomBackButton({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: 16.h,
-      width: 11.2.w,
-      child: Center(
-        child: SvgPicture.asset(
-          'back'.svg,
-          fit: BoxFit.cover,
-        ),
-      ),
-    );
-  }
-}

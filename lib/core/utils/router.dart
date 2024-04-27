@@ -1,3 +1,6 @@
+import 'package:busha_assessment/views/transaction_details.dart';
+import 'package:busha_assessment/views/transactions_view.dart';
+
 import 'exports.dart';
 
 /// Routes class to store route names
@@ -9,6 +12,8 @@ abstract class Routes {
   static const allAssetsView = '/allAssetsView';
   static const allTodaysTopMoversView = '/allTodaysTopMoversView';
   static const allTrendingNewsView = '/allTrendingNewsView';
+  static const transactionsView = '/transactionsView';
+  static const transactionDetailsView = '/transactionDetailsView';
 }
 
 class Routers {
@@ -55,6 +60,18 @@ class Routers {
       case Routes.allTrendingNewsView:
         return _pageRoute(
           const AllTrendingNewsView(),
+        );
+
+      // TransactionsView
+      case Routes.transactionsView:
+        return _pageRoute(
+          const TransactionsView(),
+        );
+
+      // TransactionDetailsView
+      case Routes.transactionDetailsView:
+        return _pageRoute(
+          const TransactionDetailsView(),
         );
 
       default:

@@ -21,9 +21,10 @@ class _AllTrendingNewsViewState extends State<AllTrendingNewsView> {
             ),
             title: Text(
               'Trending news',
-              style: GoogleFonts.rubik(
-                fontSize: 18.sp,
-                fontWeight: FontWeight.w700,
+              style: GoogleFonts.inter(
+                fontSize: 16.sp,
+                fontWeight: FontWeight.w600,
+                color: CustomColors.black.withOpacity(0.95),
               ),
             ),
             centerTitle: true,
@@ -44,16 +45,8 @@ class _AllTrendingNewsViewState extends State<AllTrendingNewsView> {
                     ),
                     separatorBuilder: (context, index) => Padding(
                       padding: 16.hp,
-                      child: Column(
-                        children: [
-                          16.szbh,
-                          // Divider
-                          Divider(
-                            thickness: 1.h,
-                            color: const Color(0xffe3e5e6),
-                          ),
-                          16.szbh,
-                        ],
+                      child: const SeparatorDivider(
+                        dividerColor: Color(0xffe3e5e6),
                       ),
                     ),
                   ),

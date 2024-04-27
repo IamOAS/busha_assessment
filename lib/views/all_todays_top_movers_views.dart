@@ -1,4 +1,3 @@
-import 'package:busha_assessment/controllers/todays_top_movers_controller.dart';
 import 'package:busha_assessment/core/utils/exports.dart';
 
 class AllTodaysTopMoversView extends StatefulWidget {
@@ -22,9 +21,10 @@ class _AllTodaysTopMoversViewState extends State<AllTodaysTopMoversView> {
             ),
             title: Text(
               'Today\'s top movers',
-              style: GoogleFonts.rubik(
-                fontSize: 18.sp,
-                fontWeight: FontWeight.w700,
+              style: GoogleFonts.inter(
+                fontSize: 16.sp,
+                fontWeight: FontWeight.w600,
+                color: CustomColors.black.withOpacity(0.95),
               ),
             ),
             centerTitle: true,
