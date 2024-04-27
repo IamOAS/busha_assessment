@@ -11,13 +11,13 @@ class AuthController extends ContraController {
   bool get isSignUpPasswordShown => ref.watch(_showSignUpPassword);
   bool get isLoginPasswordShown => ref.watch(_showLoginPassword);
 
-  // Function to toggle password visibility in the sign up view
+  /// This method is to toggle password visibility in the sign up view
   void toggleShowSignUpPassword() => ref.read(_showSignUpPassword.notifier).state = !isSignUpPasswordShown;
 
-  // Function to toggle password visibility in the login view
+  /// This method is to toggle password visibility in the login view
   void toggleShowLoginPassword() => ref.read(_showLoginPassword.notifier).state = !isLoginPasswordShown;
 
-  // Function to delay for three seconds
+  /// This method is to delay for three seconds
   Future<void> delayForThreeSeconds() async {
     await runBusyFuture(
       Future.delayed(
@@ -36,7 +36,7 @@ class AuthController extends ContraController {
         return null;
       };
 
-  /// Function to validate email address
+  /// This method is to validate email address
   String? Function(String?)? validateEmail() => (value) {
         bool isEmailValid(String email) {
           final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
@@ -51,10 +51,10 @@ class AuthController extends ContraController {
         return null;
       };
 
-  // Function to set the selected bottom tab index
+  /// This method is to set the selected bottom tab index
   void setSelectedBottomTabIndex(int index) => ref.read(selectedBottomTabIndex.notifier).state = index;
 
-  // Sign up function
+  /// Sign up function
   Future signOut() {
     setSelectedBottomTabIndex(0);
     return ref.read(navigationServiceProvider).clearStackAndNavigateTo(Routes.loginView);

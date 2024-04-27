@@ -1,14 +1,14 @@
 import 'package:busha_assessment/core/utils/exports.dart';
 
-/// A view that displays a list of transactions.
-class TransactionsView extends StatefulWidget {
-  const TransactionsView({super.key});
+/// A view that displays a list of BTC transactions.
+class BtcTransactionsView extends StatefulWidget {
+  const BtcTransactionsView({super.key});
 
   @override
-  State<TransactionsView> createState() => _TransactionsViewState();
+  State<BtcTransactionsView> createState() => _BtcTransactionsViewState();
 }
 
-class _TransactionsViewState extends State<TransactionsView> {
+class _BtcTransactionsViewState extends State<BtcTransactionsView> {
   late Future<List<Tx>?> _future;
 
   void _reloadPage(TransactionsController controller) {
@@ -30,7 +30,7 @@ class _TransactionsViewState extends State<TransactionsView> {
             switch (snapshot.connectionState) {
               case ConnectionState.waiting:
                 return CustomLoadingView(
-                  loadingText: 'Fetching your {${controller.selectedTransaction!.toUpperCase()}} transactions',
+                  loadingText: 'Fetching {${controller.selectedTransaction!.toUpperCase()}} transactions',
                 );
               default:
                 if (snapshot.hasError || snapshot.hasData == false || snapshot.data == null) {

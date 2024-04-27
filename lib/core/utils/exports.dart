@@ -18,6 +18,7 @@ export 'dart:async' hide AsyncError;
 export 'dart:io';
 export 'package:flutter/gestures.dart';
 export 'dart:math';
+export 'package:flutter/foundation.dart' hide shortHash, describeIdentity;
 
 // Custom exports
 export 'package:busha_assessment/core/extensions/widget_extension.dart';
@@ -43,6 +44,7 @@ export 'package:busha_assessment/widgets/custom_back_button.dart';
 export 'package:busha_assessment/widgets/separator_divider.dart';
 export 'package:busha_assessment/widgets/custom_future_error_widget.dart';
 export 'package:busha_assessment/widgets/alert.dart';
+export 'package:busha_assessment/widgets/custom_progress_indicator.dart';
 
 // Controllers exports
 export 'package:busha_assessment/controllers/splash_controller.dart';
@@ -71,6 +73,7 @@ export 'package:busha_assessment/models/response_model.dart';
 export 'package:busha_assessment/models/btc_latest_block_response_model.dart';
 export 'package:busha_assessment/models/error_model.dart';
 export 'package:busha_assessment/models/btc_latest_block_transactions_response_model.dart';
+export 'package:busha_assessment/models/tezos_blocks_response_model.dart';
 
 // Views exports
 export 'package:busha_assessment/views/dashboard.dart';
@@ -81,3 +84,6 @@ export 'package:busha_assessment/views/all_my_assets_view.dart';
 export 'package:busha_assessment/views/all_trending_news_view.dart';
 export 'package:busha_assessment/views/all_todays_top_movers_view.dart';
 export 'package:busha_assessment/views/loading_view.dart';
+export 'package:busha_assessment/views/tezos_blocks_view.dart';
+export 'package:busha_assessment/views/transaction_details_view.dart';
+export 'package:busha_assessment/views/btc_transactions_view.dart';

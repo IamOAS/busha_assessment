@@ -1,5 +1,6 @@
 import 'package:busha_assessment/core/utils/exports.dart';
 
+/// This class handles launching of URLs.
 class UrlLaunchService {
   Future<void> launchURL({required String url}) async {
     if (await canLaunchUrl(Uri.parse(url))) {

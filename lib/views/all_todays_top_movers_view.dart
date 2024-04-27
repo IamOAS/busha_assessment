@@ -59,7 +59,10 @@ class _AllTodaysTopMoversViewState extends State<AllTodaysTopMoversView> {
                               controller.setSelectedTransaction(controller.todaysTopMovers[index].symbol);
 
                               if (controller.todaysTopMovers[index].symbol == 'BTC') {
-                                controller.navigateTo(Routes.transactionsView);
+                                controller.navigateTo(Routes.btcTransactionsView);
+                              } else if (controller.todaysTopMovers[index].symbol == 'XTZ') {
+                                controller.resetTezosBlocksFetchingData();
+                                controller.navigateTo(Routes.tezosBlocksView);
                               } else {
                                 Fluttertoast.showToast(
                                   msg: 'Coming soon!',

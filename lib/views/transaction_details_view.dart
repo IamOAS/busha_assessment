@@ -21,7 +21,7 @@ class _TransactionDetailsViewState extends State<TransactionDetailsView> {
               child: const CustomBackButton(),
             ),
             title: Text(
-              'Transaction details',
+              controller.selectedTransaction == 'BTC' ? 'Transaction details' : 'Block details',
               style: GoogleFonts.inter(
                 fontSize: 16.sp,
                 fontWeight: FontWeight.w600,
@@ -81,7 +81,9 @@ class _TransactionDetailsViewState extends State<TransactionDetailsView> {
                     InkWell(
                       onTap: () => controller.launchURL(
                         context: context,
-                        url: 'https://www.blockchain.com/explorer/transactions/btc/${controller.transactionDetailsTiles[0].value}',
+                        url: controller.selectedTransaction == 'BTC'
+                            ? 'https://www.blockchain.com/explorer/transactions/btc/${controller.transactionDetailsTiles[0].value}'
+                            : 'https://tzkt.io/${controller.transactionDetailsTiles[0].value}',
                       ),
                       child: Row(
                         children: [

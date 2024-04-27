@@ -1,6 +1,3 @@
-import 'package:busha_assessment/views/transaction_details.dart';
-import 'package:busha_assessment/views/transactions_view.dart';
-
 import 'exports.dart';
 
 /// Routes class to store route names
@@ -12,7 +9,8 @@ abstract class Routes {
   static const allAssetsView = '/allAssetsView';
   static const allTodaysTopMoversView = '/allTodaysTopMoversView';
   static const allTrendingNewsView = '/allTrendingNewsView';
-  static const transactionsView = '/transactionsView';
+  static const btcTransactionsView = '/transactionsView';
+  static const tezosBlocksView = '/tezosTransactionsView';
   static const transactionDetailsView = '/transactionDetailsView';
 }
 
@@ -62,10 +60,16 @@ class Routers {
           const AllTrendingNewsView(),
         );
 
-      // TransactionsView
-      case Routes.transactionsView:
+      // BtcTransactionsView
+      case Routes.btcTransactionsView:
         return _pageRoute(
-          const TransactionsView(),
+          const BtcTransactionsView(),
+        );
+
+      // TezosBlocksView
+      case Routes.tezosBlocksView:
+        return _pageRoute(
+          const TezosBlocksView(),
         );
 
       // TransactionDetailsView

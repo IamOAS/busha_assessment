@@ -4,18 +4,31 @@ import 'package:busha_assessment/core/utils/exports.dart';
 class TransactionsController extends ContraController {
   TransactionsController() : super();
 
+  Future navigateTo(String routeName) => ref.read(navigationServiceProvider).navigateTo(routeName);
+  Future replaceWith(String routeName) => ref.read(navigationServiceProvider).replaceWith(routeName);
+  void navigateBack() => ref.read(navigationServiceProvider).navigateBack();
+
   String? get selectedTransaction => ref.watch(selectedTransactionProvider);
   List<TransactionDetailTile> get transactionDetailsTiles => ref.watch(btcTransactionDetailsProvider);
+  List<Block> get tezosBlocks => ref.watch(tezosBlocksFetchedProvider);
+  int get tezosBlocksCount => ref.watch(tezosBlocksCountProvider);
 
+  /// This method sets the selected transaction's details.
   void setTransactionDetailsTiles(List<TransactionDetailTile> tiles) {
     ref.read(btcTransactionDetailsProvider.notifier).state.clear();
     ref.read(btcTransactionDetailsProvider.notifier).state.addAll(tiles);
   }
 
-  Future navigateTo(String routeName) => ref.read(navigationServiceProvider).navigateTo(routeName);
-  Future replaceWith(String routeName) => ref.read(navigationServiceProvider).replaceWith(routeName);
-  void navigateBack() => ref.read(navigationServiceProvider).navigateBack();
+  /// This method sets the Tezos blocks count.
+  void setTezosBlocksCount(bool add) {
+    if (!add) {
+      ref.read(tezosBlocksCountProvider.notifier).state -= 10;
+      return;
+    }
+    ref.read(tezosBlocksCountProvider.notifier).state += 10;
+  }
 
+  /// This method launches a URL.
   void launchURL({required String url, required BuildContext context}) async {
     try {
       await ref.read(urlLaunchService).launchURL(url: url);
@@ -24,7 +37,7 @@ class TransactionsController extends ContraController {
         await customAlertDialog(
           context: context,
           title: 'Error',
-          message: e.toString(),
+          message: 'An error occurred while trying to open the link.',
         );
       }
 
@@ -32,16 +45,51 @@ class TransactionsController extends ContraController {
     }
   }
 
-  // This method fetches the latest block transactions for Bitcoin.
-  Future<List<Tx>?> getBtcLatestBlockTransactions() async {
-    bool? latestBlock = await getBtcLatestBlock();
+  final Set<String> _addedTezosBlocks = {};
 
-    if (latestBlock == null) {
+  /// This method fetches the latest Tezos blocks.
+  Future<List<Block>?> getTezosBlocks() async {
+    if (ref.read(tezosBlocksFetchedProvider.notifier).state.isNotEmpty) {
+      await Future.delayed(
+        const Duration(seconds: 3),
+        () {},
+      );
+    }
+
+    ResponseModel<TezosBlocksResponseModel> response =
+        await ref.read(transactionsService).getTezosBlocks(ref.read(tezosBlocksCountProvider.notifier).state);
+
+    if (response.valid == true) {
+      if (response.data!.blocks != null) {
+        if (ref.read(tezosBlocksFetchedProvider.notifier).state.isEmpty) {
+          ref.read(tezosBlocksFetchedProvider.notifier).state.addAll(response.data!.blocks!);
+        } else {
+          List<Block>? newTezosBlocks = response.data!.blocks!.where((tezosBlock) => !_addedTezosBlocks.contains(tezosBlock.hash)).toList();
+          ref.read(tezosBlocksFetchedProvider.notifier).state.addAll(newTezosBlocks);
+          _addedTezosBlocks.addAll(
+            newTezosBlocks.map((tezosBlock) => tezosBlock.hash!),
+          );
+        }
+
+        return response.data!.blocks;
+      }
+    } else {
+      setTezosBlocksCount(false);
+    }
+
+    return null;
+  }
+
+  /// This method fetches the latest block transactions for Bitcoin.
+  Future<List<Tx>?> getBtcLatestBlockTransactions() async {
+    String? latestBlockHash = await getBtcLatestBlock();
+
+    if (latestBlockHash == null) {
       return null;
     }
 
     ResponseModel<BitcoinLatestBlockTransactionsResponseModel> response =
-        await ref.read(transactionsService).getBtcLatestBlockTransactions(hash: ref.read(latestBlockHashProvider.notifier).state!);
+        await ref.read(transactionsService).getBtcLatestBlockTransactions(hash: latestBlockHash);
     if (response.valid == true) {
       return response.data?.tx;
     }
@@ -49,12 +97,11 @@ class TransactionsController extends ContraController {
     return null;
   }
 
-  // This method fetches the latest block hash for Bitcoin.
-  Future<bool?> getBtcLatestBlock() async {
+  /// This method fetches the latest block hash for Bitcoin.
+  Future<String?> getBtcLatestBlock() async {
     ResponseModel<BitcoinLatestBlockResponseModel> response = await ref.read(transactionsService).getBtcLatestBlock();
     if (response.valid == true) {
-      ref.read(latestBlockHashProvider.notifier).state = response.data?.hash;
-      return true;
+      return response.data?.hash;
     }
     return null;
   }

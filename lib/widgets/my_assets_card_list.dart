@@ -24,7 +24,10 @@ class MyAssetCardList extends StatelessWidget {
           controller.setSelectedTransaction(assets[index].symbol);
 
           if (assets[index].symbol == 'BTC') {
-            controller.navigateTo(Routes.transactionsView);
+            controller.navigateTo(Routes.btcTransactionsView);
+          } else if (assets[index].symbol == 'XTZ') {
+            controller.resetTezosBlocksFetchingData();
+            controller.navigateTo(Routes.tezosBlocksView);
           } else {
             Fluttertoast.showToast(
               msg: 'Coming soon!',

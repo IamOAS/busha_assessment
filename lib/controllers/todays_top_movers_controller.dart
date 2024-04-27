@@ -11,8 +11,14 @@ class TodaysTopMoversController extends ContraController {
         ...ref.watch(todayTopMoversProvider),
       ];
 
-  // Function to set the selected transaction
+  /// This method is to set the selected transaction
   void setSelectedTransaction(String? transaction) => ref.read(selectedTransactionProvider.notifier).state = transaction;
+
+  /// This method resets the Tezos blocks fetching data.
+  void resetTezosBlocksFetchingData() {
+    ref.read(tezosBlocksFetchedProvider.notifier).state.clear();
+    ref.read(tezosBlocksCountProvider.notifier).state = 10;
+  }
 
   void navigateBack() => ref.read(navigationServiceProvider).navigateBack();
   Future navigateTo(String routeName) => ref.read(navigationServiceProvider).navigateTo(routeName);
