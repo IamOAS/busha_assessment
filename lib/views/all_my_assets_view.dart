@@ -20,13 +20,7 @@ class _AllMyAssetsViewState extends State<AllMyAssetsView> {
               onTap: () => controller.navigateBack(),
               child: const CustomBackButton(),
             ),
-            title: Text(
-              'My assets',
-              style: GoogleFonts.inter(
-                fontSize: 16.sp,
-                fontWeight: FontWeight.w700,
-              ),
-            ),
+            title: const CustomAppBarTitle(text: 'My assets'),
             centerTitle: true,
           ),
           body: SafeArea(

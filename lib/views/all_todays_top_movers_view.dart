@@ -20,14 +20,7 @@ class _AllTodaysTopMoversViewState extends State<AllTodaysTopMoversView> {
               onTap: () => controller.navigateBack(),
               child: const CustomBackButton(),
             ),
-            title: Text(
-              'Today\'s top movers',
-              style: GoogleFonts.inter(
-                fontSize: 16.sp,
-                fontWeight: FontWeight.w600,
-                color: CustomColors.black.withOpacity(0.95),
-              ),
-            ),
+            title: const CustomAppBarTitle(text: 'Today\'s top movers'),
             centerTitle: true,
           ),
           body: SafeArea(

@@ -20,14 +20,7 @@ class _AllTrendingNewsViewState extends State<AllTrendingNewsView> {
               onTap: () => controller.navigateBack(),
               child: const CustomBackButton(),
             ),
-            title: Text(
-              'Trending news',
-              style: GoogleFonts.inter(
-                fontSize: 16.sp,
-                fontWeight: FontWeight.w600,
-                color: CustomColors.black.withOpacity(0.95),
-              ),
-            ),
+            title: const CustomAppBarTitle(text: 'Trending news'),
             centerTitle: true,
           ),
           body: SafeArea(

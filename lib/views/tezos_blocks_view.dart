@@ -9,8 +9,44 @@ class TezosBlocksView extends StatefulWidget {
 }
 
 class _TezosBlocksViewState extends State<TezosBlocksView> {
-  final ScrollController _scrollController = ScrollController();
+  bool _isSearching = false;
   late Future<List<Block>?> _future;
+
+  final ScrollController _scrollController = ScrollController();
+  final TextEditingController _searchController = TextEditingController();
+  final FocusNode _searchFocusNode = FocusNode();
+
+  final List<Block> _searchedBlocks = [];
+  final List<Block> _allBlocks = [];
+
+  List<Block> _tezosBlocks() {
+    if (_isSearching) {
+      return _searchedBlocks;
+    } else {
+      return _allBlocks;
+    }
+  }
+
+  void onSearch(value) {
+    if (value.isEmpty) {
+      setState(() {
+        _isSearching = false;
+        _searchedBlocks.clear();
+      });
+    } else {
+      final List<Block> filteredBlocks = _allBlocks
+          .where(
+            (element) => element.hash != null && element.hash!.toLowerCase().contains(value.toLowerCase()),
+          )
+          .toList();
+
+      setState(() {
+        _isSearching = true;
+        _searchedBlocks.clear();
+        _searchedBlocks.addAll(filteredBlocks);
+      });
+    }
+  }
 
   void _reloadPage(TransactionsController controller) {
     setState(() {
@@ -55,6 +91,12 @@ class _TezosBlocksViewState extends State<TezosBlocksView> {
                     ),
                   );
                 } else {
+                  for (Block block in controller.tezosBlocks) {
+                    if (_allBlocks.isEmpty || _allBlocks.every((element) => element.hash != block.hash)) {
+                      _allBlocks.add(block);
+                    }
+                  }
+
                   return Scaffold(
                     appBar: AppBar(
                       automaticallyImplyLeading: false,
@@ -62,13 +104,8 @@ class _TezosBlocksViewState extends State<TezosBlocksView> {
                         onTap: () => controller.navigateBack(),
                         child: const CustomBackButton(),
                       ),
-                      title: Text(
-                        '${controller.selectedTransaction!.toUpperCase()} blocks',
-                        style: GoogleFonts.inter(
-                          fontSize: 16.sp,
-                          fontWeight: FontWeight.w600,
-                          color: CustomColors.black.withOpacity(0.95),
-                        ),
+                      title: CustomAppBarTitle(
+                        text: '${controller.selectedTransaction!.toUpperCase()} blocks',
                       ),
                       centerTitle: true,
                     ),
@@ -78,57 +115,80 @@ class _TezosBlocksViewState extends State<TezosBlocksView> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            16.szbh,
+                            10.szbh,
+                            // Search bar
+                            CustomTextFormField(
+                              textFormField: TextFormFieldWidget(
+                                controller: _searchController,
+                                focusNode: _searchFocusNode,
+                                hintText: 'Search blocks',
+                                suffixIcon: _searchController.text.isNotEmpty
+                                    ? InkWell(
+                                        onTap: () {
+                                          _searchController.clear();
+                                          _searchFocusNode.unfocus();
+                                          onSearch('');
+                                        },
+                                        child: const Icon(
+                                          Icons.clear_rounded,
+                                        ),
+                                      )
+                                    : const SizedBox(),
+                                onChanged: onSearch,
+                                onFieldSubmitted: onSearch,
+                              ),
+                            ),
+                            20.szbh,
                             // Blocks
                             Expanded(
-                              child: controller.tezosBlocks.isNotEmpty
+                              child: _tezosBlocks().isNotEmpty
                                   ? ListView.separated(
                                       controller: _scrollController,
                                       shrinkWrap: true,
                                       physics: const ClampingScrollPhysics(),
-                                      itemCount: controller.tezosBlocks.length + (controller.isBusy ? 1 : 0),
+                                      itemCount: _tezosBlocks().length + (controller.isBusy ? 1 : 0),
                                       itemBuilder: (context, index) {
-                                        if (index < controller.tezosBlocks.length) {
+                                        if (index < _tezosBlocks().length) {
                                           return InkWell(
                                             onTap: () {
                                               controller.setTransactionDetailsTiles(
                                                 [
                                                   TransactionDetailTile(
                                                     title: 'Hash',
-                                                    value: controller.tezosBlocks[index].hash ?? '--',
+                                                    value: _tezosBlocks()[index].hash ?? '--',
                                                   ),
                                                   TransactionDetailTile(
                                                     title: 'Time',
-                                                    value: controller.tezosBlocks[index].timestamp?.add(
-                                                              const Duration(hours: 1),
-                                                            ) !=
+                                                    value: _tezosBlocks()[index].timestamp?.add(
+                                                                  const Duration(hours: 1),
+                                                                ) !=
                                                             null
                                                         ? '${DateFormat('yyyy-MM-dd').format(
-                                                            controller.tezosBlocks[index].timestamp!.add(
-                                                              const Duration(hours: 1),
-                                                            ),
+                                                            _tezosBlocks()[index].timestamp!.add(
+                                                                  const Duration(hours: 1),
+                                                                ),
                                                           )} • ${DateFormat.Hm().format(
-                                                            controller.tezosBlocks[index].timestamp!.add(
-                                                              const Duration(hours: 1),
-                                                            ),
+                                                            _tezosBlocks()[index].timestamp!.add(
+                                                                  const Duration(hours: 1),
+                                                                ),
                                                           )}'
                                                         : '--',
                                                   ),
                                                   TransactionDetailTile(
                                                     title: 'Level',
-                                                    value: controller.tezosBlocks[index].level?.toString() ?? '-',
+                                                    value: _tezosBlocks()[index].level?.toString() ?? '-',
                                                   ),
                                                   TransactionDetailTile(
                                                     title: 'Reward',
-                                                    value: controller.tezosBlocks[index].reward?.toString() ?? '-',
+                                                    value: _tezosBlocks()[index].reward?.toString() ?? '-',
                                                   ),
                                                   TransactionDetailTile(
                                                     title: 'Bonus',
-                                                    value: controller.tezosBlocks[index].bonus?.toString() ?? '-',
+                                                    value: _tezosBlocks()[index].bonus?.toString() ?? '-',
                                                   ),
                                                   TransactionDetailTile(
                                                     title: 'Fees',
-                                                    value: controller.tezosBlocks[index].fees?.toString() ?? '-',
+                                                    value: _tezosBlocks()[index].fees?.toString() ?? '-',
                                                   ),
                                                 ],
                                               );
@@ -143,7 +203,7 @@ class _TezosBlocksViewState extends State<TezosBlocksView> {
                                                     children: [
                                                       // Hash
                                                       Text(
-                                                        controller.tezosBlocks[index].hash ?? '--',
+                                                        _tezosBlocks()[index].hash ?? '--',
                                                         style: GoogleFonts.inter(
                                                           fontSize: 16.sp,
                                                           fontWeight: FontWeight.w400,
@@ -155,18 +215,18 @@ class _TezosBlocksViewState extends State<TezosBlocksView> {
                                                       8.szbh,
                                                       // Date and time
                                                       Text(
-                                                        controller.tezosBlocks[index].timestamp?.add(
-                                                                  const Duration(hours: 1),
-                                                                ) !=
+                                                        _tezosBlocks()[index].timestamp?.add(
+                                                                      const Duration(hours: 1),
+                                                                    ) !=
                                                                 null
                                                             ? '${DateFormat('yyyy-MM-dd').format(
-                                                                controller.tezosBlocks[index].timestamp!.add(
-                                                                  const Duration(hours: 1),
-                                                                ),
+                                                                _tezosBlocks()[index].timestamp!.add(
+                                                                      const Duration(hours: 1),
+                                                                    ),
                                                               )} • ${DateFormat.Hm().format(
-                                                                controller.tezosBlocks[index].timestamp!.add(
-                                                                  const Duration(hours: 1),
-                                                                ),
+                                                                _tezosBlocks()[index].timestamp!.add(
+                                                                      const Duration(hours: 1),
+                                                                    ),
                                                               )}'
                                                             : '--',
                                                         style: GoogleFonts.inter(

@@ -20,13 +20,8 @@ class _TransactionDetailsViewState extends State<TransactionDetailsView> {
               onTap: () => controller.navigateBack(),
               child: const CustomBackButton(),
             ),
-            title: Text(
-              controller.selectedTransaction == 'BTC' ? 'Transaction details' : 'Block details',
-              style: GoogleFonts.inter(
-                fontSize: 16.sp,
-                fontWeight: FontWeight.w600,
-                color: CustomColors.black.withOpacity(0.95),
-              ),
+            title: CustomAppBarTitle(
+              text: controller.selectedTransaction == 'BTC' ? 'Transaction details' : 'Block details',
             ),
             centerTitle: true,
           ),

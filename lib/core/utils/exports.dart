@@ -45,6 +45,7 @@ export 'package:busha_assessment/widgets/separator_divider.dart';
 export 'package:busha_assessment/widgets/custom_future_error_widget.dart';
 export 'package:busha_assessment/widgets/alert.dart';
 export 'package:busha_assessment/widgets/custom_progress_indicator.dart';
+export 'package:busha_assessment/widgets/custom_app_bar_title.dart';
 
 // Controllers exports
 export 'package:busha_assessment/controllers/splash_controller.dart';

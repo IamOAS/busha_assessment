@@ -9,7 +9,43 @@ class BtcTransactionsView extends StatefulWidget {
 }
 
 class _BtcTransactionsViewState extends State<BtcTransactionsView> {
+  bool _isSearching = false;
   late Future<List<Tx>?> _future;
+
+  final TextEditingController _searchController = TextEditingController();
+  final FocusNode _searchFocusNode = FocusNode();
+
+  final List<Tx> _searchedTransactions = [];
+  final List<Tx> _allTransactions = [];
+
+  List<Tx> _btcTransactions() {
+    if (_isSearching) {
+      return _searchedTransactions;
+    } else {
+      return _allTransactions;
+    }
+  }
+
+  void onSearch(value) {
+    if (value.isEmpty) {
+      setState(() {
+        _isSearching = false;
+        _searchedTransactions.clear();
+      });
+    } else {
+      final List<Tx> filteredTransactions = _allTransactions
+          .where(
+            (element) => element.hash != null && element.hash!.toLowerCase().contains(value.toLowerCase()),
+          )
+          .toList();
+
+      setState(() {
+        _isSearching = true;
+        _searchedTransactions.clear();
+        _searchedTransactions.addAll(filteredTransactions);
+      });
+    }
+  }
 
   void _reloadPage(TransactionsController controller) {
     setState(() {
@@ -22,6 +58,10 @@ class _BtcTransactionsViewState extends State<BtcTransactionsView> {
     return ContraViewBuilder(
       onViewReady: (TransactionsController controller) {
         _future = controller.getBtcLatestBlockTransactions();
+      },
+      onDispose: (TransactionsController controller) {
+        _searchController.dispose();
+        _searchFocusNode.dispose();
       },
       builder: (BuildContext context, TransactionsController controller) {
         return FutureBuilder<List<Tx>?>(
@@ -42,6 +82,12 @@ class _BtcTransactionsViewState extends State<BtcTransactionsView> {
                     ),
                   );
                 } else {
+                  for (Tx txn in snapshot.data!) {
+                    if (_allTransactions.isEmpty || _allTransactions.every((element) => element.hash != txn.hash)) {
+                      _allTransactions.add(txn);
+                    }
+                  }
+
                   return Scaffold(
                     appBar: AppBar(
                       automaticallyImplyLeading: false,
@@ -49,13 +95,8 @@ class _BtcTransactionsViewState extends State<BtcTransactionsView> {
                         onTap: () => controller.navigateBack(),
                         child: const CustomBackButton(),
                       ),
-                      title: Text(
-                        '${controller.selectedTransaction!.toUpperCase()} transactions',
-                        style: GoogleFonts.inter(
-                          fontSize: 16.sp,
-                          fontWeight: FontWeight.w600,
-                          color: CustomColors.black.withOpacity(0.95),
-                        ),
+                      title: CustomAppBarTitle(
+                        text: '${controller.selectedTransaction!.toUpperCase()} transactions',
                       ),
                       centerTitle: true,
                     ),
@@ -65,15 +106,38 @@ class _BtcTransactionsViewState extends State<BtcTransactionsView> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            16.szbh,
+                            10.szbh,
+                            // Search bar
+                            CustomTextFormField(
+                              textFormField: TextFormFieldWidget(
+                                controller: _searchController,
+                                focusNode: _searchFocusNode,
+                                hintText: 'Search transactions',
+                                suffixIcon: _searchController.text.isNotEmpty
+                                    ? InkWell(
+                                        onTap: () {
+                                          _searchController.clear();
+                                          _searchFocusNode.unfocus();
+                                          onSearch('');
+                                        },
+                                        child: const Icon(
+                                          Icons.clear_rounded,
+                                        ),
+                                      )
+                                    : const SizedBox(),
+                                onChanged: onSearch,
+                                onFieldSubmitted: onSearch,
+                              ),
+                            ),
+                            20.szbh,
                             // Transactions
                             Expanded(
-                              child: snapshot.data!.isNotEmpty
+                              child: _btcTransactions().isNotEmpty
                                   ? ListView.separated(
                                       shrinkWrap: true,
-                                      itemCount: snapshot.data!.length,
+                                      itemCount: _btcTransactions().length,
                                       itemBuilder: (context, index) {
-                                        DateTime date = DateTime.fromMillisecondsSinceEpoch(snapshot.data![index].time! * 1000);
+                                        DateTime date = DateTime.fromMillisecondsSinceEpoch(_btcTransactions()[index].time! * 1000);
 
                                         return InkWell(
                                           onTap: () {
@@ -81,29 +145,29 @@ class _BtcTransactionsViewState extends State<BtcTransactionsView> {
                                               [
                                                 TransactionDetailTile(
                                                   title: 'Hash',
-                                                  value: snapshot.data![index].hash ?? '--',
+                                                  value: _btcTransactions()[index].hash ?? '--',
                                                 ),
                                                 TransactionDetailTile(
                                                   title: 'Time',
-                                                  value: snapshot.data![index].time != null
+                                                  value: _btcTransactions()[index].time != null
                                                       ? '${DateFormat('yyyy-MM-dd').format(date)} • ${DateFormat.Hm().format(date)}'
                                                       : '--',
                                                 ),
                                                 TransactionDetailTile(
                                                   title: 'Size',
-                                                  value: snapshot.data![index].size?.toString() ?? '-',
+                                                  value: _btcTransactions()[index].size?.toString() ?? '-',
                                                 ),
                                                 TransactionDetailTile(
                                                   title: 'Block index',
-                                                  value: snapshot.data![index].blockIndex?.toString() ?? '-',
+                                                  value: _btcTransactions()[index].blockIndex?.toString() ?? '-',
                                                 ),
                                                 TransactionDetailTile(
                                                   title: 'Height',
-                                                  value: snapshot.data![index].blockHeight?.toString() ?? '-',
+                                                  value: _btcTransactions()[index].blockHeight?.toString() ?? '-',
                                                 ),
                                                 TransactionDetailTile(
                                                   title: 'Received time',
-                                                  value: snapshot.data![index].time != null
+                                                  value: _btcTransactions()[index].time != null
                                                       ? '${DateFormat('yyyy-MM-dd').format(date)} • ${DateFormat.Hm().format(date)}'
                                                       : '--',
                                                 ),
@@ -120,7 +184,7 @@ class _BtcTransactionsViewState extends State<BtcTransactionsView> {
                                                   children: [
                                                     // Hash
                                                     Text(
-                                                      snapshot.data![index].hash ?? '--',
+                                                      _btcTransactions()[index].hash ?? '--',
                                                       style: GoogleFonts.inter(
                                                         fontSize: 16.sp,
                                                         fontWeight: FontWeight.w400,
@@ -132,7 +196,7 @@ class _BtcTransactionsViewState extends State<BtcTransactionsView> {
                                                     8.szbh,
                                                     // Date and time
                                                     Text(
-                                                      snapshot.data![index].time != null
+                                                      _btcTransactions()[index].time != null
                                                           ? '${DateFormat('yyyy-MM-dd').format(date)} • ${DateFormat.Hm().format(date)}'
                                                           : '--',
                                                       style: GoogleFonts.inter(
@@ -154,7 +218,7 @@ class _BtcTransactionsViewState extends State<BtcTransactionsView> {
                                     )
                                   : Center(
                                       child: Text(
-                                        'No transaction to show here yet',
+                                        !_isSearching ? 'No transaction to show here yet' : 'No transaction found',
                                         style: GoogleFonts.inter(
                                           fontSize: 18.sp,
                                           fontWeight: FontWeight.w400,
