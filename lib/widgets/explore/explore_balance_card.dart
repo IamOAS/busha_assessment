@@ -51,7 +51,7 @@ class ExploreBalanceCard extends StatelessWidget {
             RichText(
               text: TextSpan(
                 text: '\u20A6',
-                style: GoogleFonts.rubik(
+                style: GoogleFonts.inter(
                   fontSize: 18.sp,
                   fontWeight: FontWeight.w700,
                   color: CustomColors.black.withOpacity(0.95),
