@@ -1,39 +1,20 @@
 import 'exports.dart';
-import 'dart:math';
 
-// Custom font family using GoogleFonts
-String? customFontFamily = GoogleFonts.publicSans().fontFamily;
-
-// App theme data
+/// The app's theme data
 final ThemeData appThemeData = ThemeData(
   brightness: Brightness.light,
-  primaryColor: const Color(0xff551E71),
-  fontFamily: GoogleFonts.publicSans().fontFamily,
-  textSelectionTheme: const TextSelectionThemeData(
-    cursorColor: Color(0xff551E71),
+  primaryColor: CustomColors.primary70,
+  colorScheme: ColorScheme.light(
+    primary: CustomColors.primary70,
+    background: CustomColors.white,
   ),
+  fontFamily: GoogleFonts.inter().fontFamily,
+  textSelectionTheme: TextSelectionThemeData(cursorColor: CustomColors.primary70),
   visualDensity: VisualDensity.adaptivePlatformDensity,
-  primarySwatch: generateMaterialColor(
-    const Color(0xff551E71),
-  ),
-  appBarTheme: const AppBarTheme(
+  primarySwatch: generateMaterialColor(CustomColors.primary70),
+  appBarTheme: AppBarTheme(
     elevation: 0.0,
-    color: Color(0xffffffff),
-  ),
-  textTheme: TextTheme(
-    // Different text styles using GoogleFonts
-    displayLarge: GoogleFonts.publicSans(
-      fontSize: 27.sp,
-      fontWeight: FontWeight.w600,
-    ),
-    displayMedium: GoogleFonts.publicSans(
-      fontSize: 18.sp,
-      fontWeight: FontWeight.w500,
-    ),
-    bodyLarge: GoogleFonts.publicSans(
-      fontSize: 16.sp,
-      fontWeight: FontWeight.w400,
-    ),
+    color: CustomColors.white,
   ),
 );
 
