@@ -142,116 +142,124 @@ class _TezosBlocksViewState extends State<TezosBlocksView> {
                             // Blocks
                             Expanded(
                               child: _tezosBlocks().isNotEmpty
-                                  ? ListView.separated(
-                                      controller: _scrollController,
-                                      shrinkWrap: true,
-                                      physics: const ClampingScrollPhysics(),
-                                      itemCount: _tezosBlocks().length + (controller.isBusy ? 1 : 0),
-                                      itemBuilder: (context, index) {
-                                        if (index < _tezosBlocks().length) {
-                                          return InkWell(
-                                            onTap: () {
-                                              controller.setTransactionDetailsTiles(
-                                                [
-                                                  TransactionDetailTile(
-                                                    title: 'Hash',
-                                                    value: _tezosBlocks()[index].hash ?? '--',
-                                                  ),
-                                                  TransactionDetailTile(
-                                                    title: 'Time',
-                                                    value: _tezosBlocks()[index].timestamp?.add(
-                                                                  const Duration(hours: 1),
-                                                                ) !=
-                                                            null
-                                                        ? '${DateFormat('yyyy-MM-dd').format(
-                                                            _tezosBlocks()[index].timestamp!.add(
-                                                                  const Duration(hours: 1),
-                                                                ),
-                                                          )} • ${DateFormat.Hm().format(
-                                                            _tezosBlocks()[index].timestamp!.add(
-                                                                  const Duration(hours: 1),
-                                                                ),
-                                                          )}'
-                                                        : '--',
-                                                  ),
-                                                  TransactionDetailTile(
-                                                    title: 'Level',
-                                                    value: _tezosBlocks()[index].level?.toString() ?? '-',
-                                                  ),
-                                                  TransactionDetailTile(
-                                                    title: 'Reward',
-                                                    value: _tezosBlocks()[index].reward?.toString() ?? '-',
-                                                  ),
-                                                  TransactionDetailTile(
-                                                    title: 'Bonus',
-                                                    value: _tezosBlocks()[index].bonus?.toString() ?? '-',
-                                                  ),
-                                                  TransactionDetailTile(
-                                                    title: 'Fees',
-                                                    value: _tezosBlocks()[index].fees?.toString() ?? '-',
-                                                  ),
-                                                ],
-                                              );
-                                              controller.navigateTo(Routes.transactionDetailsView);
-                                            },
-                                            child: Row(
-                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                              children: [
-                                                Expanded(
-                                                  child: Column(
-                                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                                    children: [
-                                                      // Hash
-                                                      Text(
-                                                        _tezosBlocks()[index].hash ?? '--',
-                                                        style: GoogleFonts.inter(
-                                                          fontSize: 16.sp,
-                                                          fontWeight: FontWeight.w400,
-                                                          color: CustomColors.black.withOpacity(0.95),
-                                                        ),
-                                                        maxLines: 1,
-                                                        overflow: TextOverflow.ellipsis,
-                                                      ),
-                                                      8.szbh,
-                                                      // Date and time
-                                                      Text(
-                                                        _tezosBlocks()[index].timestamp?.add(
-                                                                      const Duration(hours: 1),
-                                                                    ) !=
-                                                                null
-                                                            ? '${DateFormat('yyyy-MM-dd').format(
-                                                                _tezosBlocks()[index].timestamp!.add(
-                                                                      const Duration(hours: 1),
-                                                                    ),
-                                                              )} • ${DateFormat.Hm().format(
-                                                                _tezosBlocks()[index].timestamp!.add(
-                                                                      const Duration(hours: 1),
-                                                                    ),
-                                                              )}'
-                                                            : '--',
-                                                        style: GoogleFonts.inter(
-                                                          fontSize: 14.sp,
-                                                          fontWeight: FontWeight.w400,
-                                                          color: CustomColors.black.withOpacity(0.56),
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                                16.szbw,
-                                                const SizeXSVG(icon: 'chevron-right', size: 36),
-                                              ],
-                                            ),
-                                          );
-                                        } else {
-                                          return Center(
-                                            child: CustomProgressIndicator(
-                                              iosIndicatorRadius: 15.r,
-                                            ),
-                                          );
-                                        }
+                                  ? RefreshIndicator.adaptive(
+                                      color: CustomColors.primary70,
+                                      onRefresh: () async {
+                                        _reloadPage(controller);
                                       },
-                                      separatorBuilder: (context, index) => const SeparatorDivider(),
+                                      child: ListView.separated(
+                                        controller: _scrollController,
+                                        shrinkWrap: true,
+                                        physics: const ClampingScrollPhysics(),
+                                        itemCount: _tezosBlocks().length + (controller.isBusy ? 1 : 0),
+                                        itemBuilder: (context, index) {
+                                          if (index < _tezosBlocks().length) {
+                                            return InkWell(
+                                              onTap: () {
+                                                controller.setTransactionDetailsTiles(
+                                                  [
+                                                    TransactionDetailTile(
+                                                      title: 'Hash',
+                                                      value: _tezosBlocks()[index].hash ?? '--',
+                                                    ),
+                                                    TransactionDetailTile(
+                                                      title: 'Time',
+                                                      value: _tezosBlocks()[index].timestamp?.add(
+                                                                    const Duration(hours: 1),
+                                                                  ) !=
+                                                              null
+                                                          ? '${DateFormat('yyyy-MM-dd').format(
+                                                              _tezosBlocks()[index].timestamp!.add(
+                                                                    const Duration(hours: 1),
+                                                                  ),
+                                                            )} • ${DateFormat.Hm().format(
+                                                              _tezosBlocks()[index].timestamp!.add(
+                                                                    const Duration(hours: 1),
+                                                                  ),
+                                                            )}'
+                                                          : '--',
+                                                    ),
+                                                    TransactionDetailTile(
+                                                      title: 'Level',
+                                                      value: _tezosBlocks()[index].level?.toString() ?? '--',
+                                                    ),
+                                                    TransactionDetailTile(
+                                                      title: 'Reward',
+                                                      value: _tezosBlocks()[index].reward?.toString() ?? '--',
+                                                    ),
+                                                    TransactionDetailTile(
+                                                      title: 'Bonus',
+                                                      value: _tezosBlocks()[index].bonus?.toString() ?? '--',
+                                                    ),
+                                                    TransactionDetailTile(
+                                                      title: 'Fees',
+                                                      value: _tezosBlocks()[index].fees != null
+                                                          ? NumberFormat('#,###').format(_tezosBlocks()[index].fees!)
+                                                          : '--',
+                                                    ),
+                                                  ],
+                                                );
+                                                controller.navigateTo(Routes.transactionDetailsView);
+                                              },
+                                              child: Row(
+                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                children: [
+                                                  Expanded(
+                                                    child: Column(
+                                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                                      children: [
+                                                        // Hash
+                                                        Text(
+                                                          _tezosBlocks()[index].hash ?? '--',
+                                                          style: GoogleFonts.inter(
+                                                            fontSize: 16.sp,
+                                                            fontWeight: FontWeight.w400,
+                                                            color: CustomColors.black.withOpacity(0.95),
+                                                          ),
+                                                          maxLines: 1,
+                                                          overflow: TextOverflow.ellipsis,
+                                                        ),
+                                                        8.szbh,
+                                                        // Date and time
+                                                        Text(
+                                                          _tezosBlocks()[index].timestamp?.add(
+                                                                        const Duration(hours: 1),
+                                                                      ) !=
+                                                                  null
+                                                              ? '${DateFormat('yyyy-MM-dd').format(
+                                                                  _tezosBlocks()[index].timestamp!.add(
+                                                                        const Duration(hours: 1),
+                                                                      ),
+                                                                )} • ${DateFormat.Hm().format(
+                                                                  _tezosBlocks()[index].timestamp!.add(
+                                                                        const Duration(hours: 1),
+                                                                      ),
+                                                                )}'
+                                                              : '--',
+                                                          style: GoogleFonts.inter(
+                                                            fontSize: 14.sp,
+                                                            fontWeight: FontWeight.w400,
+                                                            color: CustomColors.black.withOpacity(0.56),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  16.szbw,
+                                                  const SizeXSVG(icon: 'chevron-right', size: 36),
+                                                ],
+                                              ),
+                                            );
+                                          } else {
+                                            return Center(
+                                              child: CustomProgressIndicator(
+                                                iosIndicatorRadius: 15.r,
+                                              ),
+                                            );
+                                          }
+                                        },
+                                        separatorBuilder: (context, index) => const SeparatorDivider(),
+                                      ),
                                     )
                                   : Center(
                                       child: Text(

@@ -1,6 +1,4 @@
 import 'package:busha_assessment/core/utils/exports.dart';
-import 'package:busha_assessment/views/empty_page_view.dart';
-import 'package:busha_assessment/views/explore_view.dart';
 
 /// The dashboard view.
 class DashboardView extends StatefulWidget {
@@ -34,7 +32,7 @@ class _DashboardViewState extends State<DashboardView> {
       bottomNavigationBar: ContraViewBuilder(
         builder: (BuildContext context, DashboardController controller) {
           return BottomNavigationBar(
-            key: controller.bottomNavBarKey_,
+            key: const Key('bottomNavigationBar'),
             type: BottomNavigationBarType.fixed,
             showSelectedLabels: true,
             showUnselectedLabels: true,

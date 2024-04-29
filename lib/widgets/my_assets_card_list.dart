@@ -20,6 +20,7 @@ class MyAssetCardList extends StatelessWidget {
       itemCount: assets.length,
       physics: !shouldScroll ? const NeverScrollableScrollPhysics() : const AlwaysScrollableScrollPhysics(),
       itemBuilder: (context, index) => InkWell(
+        key: ValueKey(assets[index].symbol),
         onTap: () {
           controller.setSelectedTransaction(assets[index].symbol);
 

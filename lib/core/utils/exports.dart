@@ -88,3 +88,5 @@ export 'package:busha_assessment/views/loading_view.dart';
 export 'package:busha_assessment/views/tezos_blocks_view.dart';
 export 'package:busha_assessment/views/transaction_details_view.dart';
 export 'package:busha_assessment/views/btc_transactions_view.dart';
+export 'package:busha_assessment/views/empty_page_view.dart';
+export 'package:busha_assessment/views/explore_view.dart';

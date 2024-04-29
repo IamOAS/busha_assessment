@@ -31,13 +31,16 @@ class ExploreBalanceCard extends StatelessWidget {
                 ),
               ),
               4.szbw,
-              InkWell(
-                onTap: () {
-                  controller.toggleShowBalance();
-                },
-                child: Icon(
-                  controller.isBalanceShown ? Icons.visibility : Icons.visibility_off,
-                  color: CustomColors.black.withOpacity(0.6),
+              Tooltip(
+                message: controller.isBalanceShown ? 'Hide balance' : 'Show balance',
+                child: InkWell(
+                  onTap: () {
+                    controller.toggleShowBalance();
+                  },
+                  child: Icon(
+                    controller.isBalanceShown ? Icons.visibility : Icons.visibility_off,
+                    color: CustomColors.black.withOpacity(0.6),
+                  ),
                 ),
               ),
             ],
@@ -55,7 +58,7 @@ class ExploreBalanceCard extends StatelessWidget {
                 ),
                 children: [
                   TextSpan(
-                    text: '5,000.00',
+                    text: NumberFormat('#,###').format(5000),
                     style: GoogleFonts.rubik(
                       fontSize: 32.sp,
                       fontWeight: FontWeight.w700,

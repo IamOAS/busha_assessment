@@ -89,6 +89,7 @@ class _BtcTransactionsViewState extends State<BtcTransactionsView> {
                   }
 
                   return Scaffold(
+                    key: const Key('btc_transactions_view'),
                     appBar: AppBar(
                       automaticallyImplyLeading: false,
                       leading: InkWell(
@@ -133,88 +134,95 @@ class _BtcTransactionsViewState extends State<BtcTransactionsView> {
                             // Transactions
                             Expanded(
                               child: _btcTransactions().isNotEmpty
-                                  ? ListView.separated(
-                                      shrinkWrap: true,
-                                      itemCount: _btcTransactions().length,
-                                      itemBuilder: (context, index) {
-                                        DateTime date = DateTime.fromMillisecondsSinceEpoch(_btcTransactions()[index].time! * 1000);
-
-                                        return InkWell(
-                                          onTap: () {
-                                            controller.setTransactionDetailsTiles(
-                                              [
-                                                TransactionDetailTile(
-                                                  title: 'Hash',
-                                                  value: _btcTransactions()[index].hash ?? '--',
-                                                ),
-                                                TransactionDetailTile(
-                                                  title: 'Time',
-                                                  value: _btcTransactions()[index].time != null
-                                                      ? '${DateFormat('yyyy-MM-dd').format(date)} • ${DateFormat.Hm().format(date)}'
-                                                      : '--',
-                                                ),
-                                                TransactionDetailTile(
-                                                  title: 'Size',
-                                                  value: _btcTransactions()[index].size?.toString() ?? '-',
-                                                ),
-                                                TransactionDetailTile(
-                                                  title: 'Block index',
-                                                  value: _btcTransactions()[index].blockIndex?.toString() ?? '-',
-                                                ),
-                                                TransactionDetailTile(
-                                                  title: 'Height',
-                                                  value: _btcTransactions()[index].blockHeight?.toString() ?? '-',
-                                                ),
-                                                TransactionDetailTile(
-                                                  title: 'Received time',
-                                                  value: _btcTransactions()[index].time != null
-                                                      ? '${DateFormat('yyyy-MM-dd').format(date)} • ${DateFormat.Hm().format(date)}'
-                                                      : '--',
-                                                ),
-                                              ],
-                                            );
-                                            controller.navigateTo(Routes.transactionDetailsView);
-                                          },
-                                          child: Row(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                            children: [
-                                              Expanded(
-                                                child: Column(
-                                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                                  children: [
-                                                    // Hash
-                                                    Text(
-                                                      _btcTransactions()[index].hash ?? '--',
-                                                      style: GoogleFonts.inter(
-                                                        fontSize: 16.sp,
-                                                        fontWeight: FontWeight.w400,
-                                                        color: CustomColors.black.withOpacity(0.95),
-                                                      ),
-                                                      maxLines: 1,
-                                                      overflow: TextOverflow.ellipsis,
-                                                    ),
-                                                    8.szbh,
-                                                    // Date and time
-                                                    Text(
-                                                      _btcTransactions()[index].time != null
-                                                          ? '${DateFormat('yyyy-MM-dd').format(date)} • ${DateFormat.Hm().format(date)}'
-                                                          : '--',
-                                                      style: GoogleFonts.inter(
-                                                        fontSize: 14.sp,
-                                                        fontWeight: FontWeight.w400,
-                                                        color: CustomColors.black.withOpacity(0.56),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                              16.szbw,
-                                              const SizeXSVG(icon: 'chevron-right', size: 36),
-                                            ],
-                                          ),
-                                        );
+                                  ? RefreshIndicator.adaptive(
+                                      color: CustomColors.primary70,
+                                      onRefresh: () async {
+                                        _reloadPage(controller);
                                       },
-                                      separatorBuilder: (context, index) => const SeparatorDivider(),
+                                      child: ListView.separated(
+                                        shrinkWrap: true,
+                                        itemCount: _btcTransactions().length,
+                                        itemBuilder: (context, index) {
+                                          DateTime date = DateTime.fromMillisecondsSinceEpoch(_btcTransactions()[index].time! * 1000);
+
+                                          return InkWell(
+                                            key: Key('transaction_tile_$index'),
+                                            onTap: () {
+                                              controller.setTransactionDetailsTiles(
+                                                [
+                                                  TransactionDetailTile(
+                                                    title: 'Hash',
+                                                    value: _btcTransactions()[index].hash ?? '--',
+                                                  ),
+                                                  TransactionDetailTile(
+                                                    title: 'Time',
+                                                    value: _btcTransactions()[index].time != null
+                                                        ? '${DateFormat('yyyy-MM-dd').format(date)} • ${DateFormat.Hm().format(date)}'
+                                                        : '--',
+                                                  ),
+                                                  TransactionDetailTile(
+                                                    title: 'Size',
+                                                    value: _btcTransactions()[index].size?.toString() ?? '--',
+                                                  ),
+                                                  TransactionDetailTile(
+                                                    title: 'Block index',
+                                                    value: _btcTransactions()[index].blockIndex?.toString() ?? '--',
+                                                  ),
+                                                  TransactionDetailTile(
+                                                    title: 'Height',
+                                                    value: _btcTransactions()[index].blockHeight?.toString() ?? '--',
+                                                  ),
+                                                  TransactionDetailTile(
+                                                    title: 'Received time',
+                                                    value: _btcTransactions()[index].time != null
+                                                        ? '${DateFormat('yyyy-MM-dd').format(date)} • ${DateFormat.Hm().format(date)}'
+                                                        : '--',
+                                                  ),
+                                                ],
+                                              );
+                                              controller.navigateTo(Routes.transactionDetailsView);
+                                            },
+                                            child: Row(
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: [
+                                                Expanded(
+                                                  child: Column(
+                                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                                    children: [
+                                                      // Hash
+                                                      Text(
+                                                        _btcTransactions()[index].hash ?? '--',
+                                                        style: GoogleFonts.inter(
+                                                          fontSize: 16.sp,
+                                                          fontWeight: FontWeight.w400,
+                                                          color: CustomColors.black.withOpacity(0.95),
+                                                        ),
+                                                        maxLines: 1,
+                                                        overflow: TextOverflow.ellipsis,
+                                                      ),
+                                                      8.szbh,
+                                                      // Date and time
+                                                      Text(
+                                                        _btcTransactions()[index].time != null
+                                                            ? '${DateFormat('yyyy-MM-dd').format(date)} • ${DateFormat.Hm().format(date)}'
+                                                            : '--',
+                                                        style: GoogleFonts.inter(
+                                                          fontSize: 14.sp,
+                                                          fontWeight: FontWeight.w400,
+                                                          color: CustomColors.black.withOpacity(0.56),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                                16.szbw,
+                                                const SizeXSVG(icon: 'chevron-right', size: 36),
+                                              ],
+                                            ),
+                                          );
+                                        },
+                                        separatorBuilder: (context, index) => const SeparatorDivider(),
+                                      ),
                                     )
                                   : Center(
                                       child: Text(

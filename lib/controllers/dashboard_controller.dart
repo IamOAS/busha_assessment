@@ -7,7 +7,6 @@ class DashboardController extends ContraController {
 
   List<String> get labels_ => ref.watch(labels);
   int get selectedIndex => ref.watch(selectedBottomTabIndex);
-  GlobalKey<State<StatefulWidget>> get bottomNavBarKey_ => ref.watch(bottomNavBarKey);
 
   /// This method is to set the selected bottom tab index
   void onItemTapped(int index) => ref.read(selectedBottomTabIndex.notifier).state = index;

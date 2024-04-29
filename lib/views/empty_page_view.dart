@@ -9,26 +9,7 @@ class EmptyPageView extends StatefulWidget {
   State<EmptyPageView> createState() => _EmptyPageViewState();
 }
 
-class _EmptyPageViewState extends State<EmptyPageView> with SingleTickerProviderStateMixin {
-  late AnimationController _animationController;
-  late Animation<double> _animation;
-
-  @override
-  void initState() {
-    super.initState();
-    _animationController = AnimationController(
-      vsync: this,
-      duration: const Duration(seconds: 1),
-    )..repeat(reverse: true);
-    _animation = Tween<double>(begin: 0.0, end: 1.0).animate(_animationController);
-  }
-
-  @override
-  void dispose() {
-    _animationController.dispose();
-    super.dispose();
-  }
-
+class _EmptyPageViewState extends State<EmptyPageView> {
   @override
   Widget build(BuildContext context) {
     return ContraViewBuilder(
@@ -45,15 +26,12 @@ class _EmptyPageViewState extends State<EmptyPageView> with SingleTickerProvider
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           // Empty Page
-                          FadeTransition(
-                            opacity: _animation,
-                            child: Text(
-                              'Empty Page',
-                              style: GoogleFonts.inter(
-                                fontSize: 24.sp,
-                                fontWeight: FontWeight.w700,
-                                color: CustomColors.primary70,
-                              ),
+                          Text(
+                            'Empty Page',
+                            style: GoogleFonts.inter(
+                              fontSize: 24.sp,
+                              fontWeight: FontWeight.w700,
+                              color: CustomColors.primary70,
                             ),
                           ),
                           16.szbh,
@@ -75,6 +53,7 @@ class _EmptyPageViewState extends State<EmptyPageView> with SingleTickerProvider
                   Padding(
                     padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 16.w),
                     child: CustomButton(
+                      key: const Key('signOutButton'),
                       onTap: () => controller.signOut(),
                       text: 'Sign out',
                     ),

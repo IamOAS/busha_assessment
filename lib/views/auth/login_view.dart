@@ -66,6 +66,7 @@ class _LoginViewState extends State<LoginView> {
                             CustomTextFormField(
                               label: 'Email address',
                               textFormField: TextFormFieldWidget(
+                                key: const Key('emailAddressTextField'),
                                 controller: _emailController,
                                 focusNode: _emailFocusNode,
                                 nextFocusNode: _passwordFocusNode,
@@ -85,6 +86,7 @@ class _LoginViewState extends State<LoginView> {
                             CustomTextFormField(
                               label: 'Password',
                               textFormField: TextFormFieldWidget(
+                                key: const Key('passwordTextField'),
                                 controller: _passwordController,
                                 focusNode: _passwordFocusNode,
                                 hintText: 'Enter password',
@@ -120,7 +122,15 @@ class _LoginViewState extends State<LoginView> {
                               child: Tooltip(
                                 message: 'Forgot password?',
                                 child: TextButton(
-                                  onPressed: () {},
+                                  onPressed: () => Fluttertoast.showToast(
+                                    msg: 'Coming soon!',
+                                    toastLength: Toast.LENGTH_LONG,
+                                    gravity: ToastGravity.BOTTOM,
+                                    timeInSecForIosWeb: 1,
+                                    backgroundColor: CustomColors.primary70,
+                                    textColor: CustomColors.white,
+                                    fontSize: 16.sp,
+                                  ),
                                   child: Text(
                                     'Forgot password?',
                                     style: GoogleFonts.inter(
@@ -139,7 +149,7 @@ class _LoginViewState extends State<LoginView> {
                     30.szbh,
                     // Continue button
                     Tooltip(
-                      message: 'Continue',
+                      message: 'Continue button',
                       child: CustomListenableButton(
                         textEditingControllers: [_emailController, _passwordController],
                         formKey: _formKey,
@@ -154,6 +164,7 @@ class _LoginViewState extends State<LoginView> {
                     16.szbh,
                     // Don't have an account? Sign up
                     RichText(
+                      key: const Key('signUpButton'),
                       textAlign: TextAlign.center,
                       text: TextSpan(
                         children: [

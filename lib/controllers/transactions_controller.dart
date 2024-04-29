@@ -4,6 +4,9 @@ import 'package:busha_assessment/core/utils/exports.dart';
 class TransactionsController extends ContraController {
   TransactionsController() : super();
 
+  List<Tx>? btcTransactionsList = [];
+  List<Block>? tezosBlocksList = [];
+
   Future navigateTo(String routeName) => ref.read(navigationServiceProvider).navigateTo(routeName);
   Future replaceWith(String routeName) => ref.read(navigationServiceProvider).replaceWith(routeName);
   void navigateBack() => ref.read(navigationServiceProvider).navigateBack();
@@ -91,6 +94,8 @@ class TransactionsController extends ContraController {
     ResponseModel<BitcoinLatestBlockTransactionsResponseModel> response =
         await ref.read(transactionsService).getBtcLatestBlockTransactions(hash: latestBlockHash);
     if (response.valid == true) {
+      btcTransactionsList?.clear();
+      btcTransactionsList?.addAll(response.data?.tx ?? []);
       return response.data?.tx;
     }
 

@@ -15,9 +15,12 @@ class _ExploreViewState extends State<ExploreView> {
       builder: (BuildContext context, ExploreController controller) {
         return Scaffold(
           appBar: AppBar(
-            leading: const SizeXSVG(
-              icon: 'scan',
-              size: 24,
+            leading: const Tooltip(
+              message: 'Scan QR code',
+              child: SizeXSVG(
+                icon: 'scan',
+                size: 24,
+              ),
             ),
             title: Text(
               'Explore',
@@ -28,14 +31,20 @@ class _ExploreViewState extends State<ExploreView> {
             ),
             centerTitle: true,
             actions: [
-              const SizeXSVG(
-                icon: 'search',
-                size: 24,
+              const Tooltip(
+                message: 'Search',
+                child: SizeXSVG(
+                  icon: 'search',
+                  size: 24,
+                ),
               ),
               16.szbw,
-              const SizeXSVG(
-                icon: 'notification',
-                size: 24,
+              const Tooltip(
+                message: 'Notifications',
+                child: SizeXSVG(
+                  icon: 'notification',
+                  size: 24,
+                ),
               ),
               10.szbw,
             ],
