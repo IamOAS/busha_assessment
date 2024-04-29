@@ -1,16 +1,16 @@
-# busha_assessment
+Mobile Dev Assessment
 
-A new Flutter project.
+This Flutter application is created as part of a mobile development assessment. The application includes features such as user authentication, viewing transactions of the latest block from Bitcoin and Tezos networks which involves integration with external APIs.
 
-## Getting Started
+Features
+User Authentication: Users can log in to access the app's features.
+Transaction Listing: Users can view the transactions of the latest block from Bitcoin or view Tezos blocks.
+API Integration: Calls external APIs to retrieve transactions data.
 
-This project is a starting point for a Flutter application.
+DEMO
+A demo video showcasing the application's features is available here: https://photos.app.goo.gl/ZuDt1yNyUHKVhQ936
 
-A few resources to get you started if this is your first Flutter project:
+APK
+You can download the APK file from this link: https://drive.google.com/file/d/1a94r5ss5EUkrd0i9f0ke39cbhVl8VoBu/view?usp=sharing
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
